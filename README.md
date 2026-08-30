@@ -88,7 +88,7 @@ Deep learning application for identifying plant diseases from leaf images using 
 | Problem | Automated plant disease identification |
 | Approach | Transfer Learning with pre-trained CNN models |
 | Data Processing | Image preprocessing and augmentation |
-| Prediction | Real-time disease classification |
+| Prediction | Disease classification |
 | Impact | Supports early disease detection and crop management |
 
 **Key Work:**
@@ -96,8 +96,6 @@ Deep learning application for identifying plant diseases from leaf images using 
 - Implemented image preprocessing and augmentation
 - Developed disease prediction functionality
 - Focused on improving model performance
-
-[View Repository](https://github.com/subramani2006)
 
 </details>
 
@@ -118,7 +116,7 @@ AI-powered computer vision system designed to detect driver drowsiness in real t
 | Approach | Facial landmark and computer vision analysis |
 | Detection | Eye closure, blink rate and yawning |
 | Processing | Real-time video analysis |
-| Safety | Instant alert mechanism |
+| Safety | Alert mechanism |
 
 **Key Work:**
 - Implemented facial landmark detection using MediaPipe
@@ -126,8 +124,6 @@ AI-powered computer vision system designed to detect driver drowsiness in real t
 - Detected yawning using computer vision techniques
 - Integrated TensorFlow into the detection workflow
 - Implemented a real-time alert mechanism
-
-[View Repository](https://github.com/subramani2006)
 
 </details>
 
@@ -253,53 +249,11 @@ Data analytics project focused on analyzing sales performance, customer behavior
 
 ---
 
-## GitHub Analytics
-
-<div align="center">
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=subramani2006&show_icons=true&theme=tokyonight&hide_border=true)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=subramani2006&layout=compact&theme=tokyonight&hide_border=true)
-
-</div>
-
----
-
 ## GitHub Streak
 
 <div align="center">
 
 <img src="https://streak-stats.demolab.com?user=subramani2006&theme=tokyonight&hide_border=true" />
-
-</div>
-
----
-
-## GitHub Trophies
-
-<div align="center">
-
-<img src="https://github-profile-trophy.vercel.app/?username=subramani2006&theme=tokyonight&no-frame=true&no-bg=true&margin-w=4" />
-
-</div>
-
----
-
-## Contribution Activity
-
-<div align="center">
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=subramani2006&theme=tokyo-night&hide_border=true" />
-
-</div>
-
----
-
-## Contribution Snake
-
-<div align="center">
-
-<img src="https://raw.githubusercontent.com/subramani2006/subramani2006/output/github-contribution-grid-snake.svg" alt="GitHub Contribution Snake" />
 
 </div>
 
