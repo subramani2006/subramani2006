@@ -1744,76 +1744,117 @@ function drawPortal(time) {
 
 function drawPlayer() {
 
-    // Trail
+    function drawPlayer() {
 
-    for (
-        let i = 0;
-        i < player.trail.length;
-        i++
-    ) {
+    const now = performance.now() / 1000;
 
-        const point =
-            player.trail[i];
+    // ================================================
+    // ENERGY TRAIL
+    // ================================================
+
+    for (let i = 0; i < player.trail.length; i++) {
+
+        const point = player.trail[i];
 
         const alpha =
-            point.life / 0.35;
+            Math.max(0, point.life / 0.35);
+
+        ctx.save();
+
+        ctx.globalAlpha =
+            alpha * 0.45;
 
         ctx.fillStyle =
-            `rgba(0,217,255,${alpha * 0.3})`;
+            "#00d9ff";
+
+        ctx.shadowBlur =
+            15;
+
+        ctx.shadowColor =
+            "#00d9ff";
 
         ctx.beginPath();
 
         ctx.arc(
             point.x,
             point.y,
-            3 * alpha,
+            5 * alpha,
             0,
             Math.PI * 2
         );
 
         ctx.fill();
+
+        ctx.restore();
     }
+
+
+    // ================================================
+    // ANIMATION
+    // ================================================
+
+    const pulse =
+        Math.sin(now * 5) * 2;
+
+    const hover =
+        Math.sin(now * 4) * 2;
+
+    const rotation =
+        now * 1.8;
 
 
     ctx.save();
 
     ctx.translate(
         player.x,
-        player.y
+        player.y + hover
     );
 
-    ctx.rotate(
-        player.angle
-    );
+    ctx.rotate(player.angle);
 
+
+    // ================================================
+    // DAMAGE FLASH
+    // ================================================
 
     if (
         player.invulnerable > 0 &&
         Math.floor(
-            player.invulnerable * 10
+            player.invulnerable * 12
         ) % 2 === 0
     ) {
-        ctx.globalAlpha = 0.35;
+
+        ctx.globalAlpha =
+            0.45;
     }
 
 
-    // Shield
+    // ================================================
+    // OUTER ENERGY RING
+    // ================================================
+
+    ctx.save();
+
+    ctx.rotate(-rotation);
 
     ctx.strokeStyle =
-        "rgba(0,217,255,0.25)";
+        "rgba(0,217,255,0.35)";
 
-    ctx.lineWidth = 2;
+    ctx.lineWidth =
+        2;
+
+    ctx.shadowBlur =
+        20;
+
+    ctx.shadowColor =
+        "#00d9ff";
 
     ctx.beginPath();
 
     ctx.arc(
         0,
         0,
-        27 +
-            Math.sin(
-                performance.now() / 150
-            ) *
-            2,
+        40 + pulse,
         0,
         Math.PI * 2
     );
@@ -1821,37 +1862,190 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // Glow
+    ctx.strokeStyle =
+        "rgba(111,66,193,0.75)";
 
-    ctx.shadowBlur = 25;
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        0,
+        34,
+        -0.7,
+        1.8
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+
+
+    // ================================================
+    // DIRECTION INDICATOR
+    // ================================================
+
+    ctx.strokeStyle =
+        "rgba(0,217,255,0.45)";
+
+    ctx.lineWidth =
+        1;
+
+    ctx.setLineDash([
+        4,
+        6
+    ]);
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        18,
+        0
+    );
+
+    ctx.lineTo(
+        58,
+        0
+    );
+
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+
+
+    // ================================================
+    // BOOST FLAME
+    // ================================================
+
+    if (player.boost) {
+
+        const flame =
+            25 +
+            Math.sin(now * 20) * 8;
+
+        ctx.save();
+
+        ctx.shadowBlur =
+            30;
+
+        ctx.shadowColor =
+            "#00d9ff";
+
+        const gradient =
+            ctx.createLinearGradient(
+                -10,
+                0,
+                -flame,
+                0
+            );
+
+        gradient.addColorStop(
+            0,
+            "#ffffff"
+        );
+
+        gradient.addColorStop(
+            0.35,
+            "#00d9ff"
+        );
+
+        gradient.addColorStop(
+            1,
+            "rgba(0,217,255,0)"
+        );
+
+        ctx.fillStyle =
+            gradient;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -12,
+            -7
+        );
+
+        ctx.lineTo(
+            -flame,
+            0
+        );
+
+        ctx.lineTo(
+            -12,
+            7
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+
+    // ================================================
+    // ROBOT BODY
+    // ================================================
+
+    ctx.shadowBlur =
+        28;
 
     ctx.shadowColor =
         "#00d9ff";
 
-
-    // Robot body
-
     ctx.fillStyle =
-        "#09131f";
+        "#071522";
 
     ctx.strokeStyle =
         "#00d9ff";
 
-    ctx.lineWidth = 2;
+    ctx.lineWidth =
+        2;
 
     ctx.beginPath();
 
-    ctx.moveTo(20, 0);
+    ctx.moveTo(
+        24,
+        0
+    );
 
-    ctx.lineTo(8, -14);
+    ctx.lineTo(
+        14,
+        -16
+    );
 
-    ctx.lineTo(-12, -12);
+    ctx.lineTo(
+        4,
+        -21
+    );
 
-    ctx.lineTo(-18, 0);
+    ctx.lineTo(
+        -14,
+        -17
+    );
 
-    ctx.lineTo(-12, 12);
+    ctx.lineTo(
+        -23,
+        -7
+    );
 
-    ctx.lineTo(8, 14);
+    ctx.lineTo(
+        -23,
+        7
+    );
+
+    ctx.lineTo(
+        -14,
+        17
+    );
+
+    ctx.lineTo(
+        4,
+        21
+    );
+
+    ctx.lineTo(
+        14,
+        16
+    );
 
     ctx.closePath();
 
@@ -1860,87 +2054,389 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // Robot head
+    // ================================================
+    // INNER ARMOR
+    // ================================================
+
+    ctx.shadowBlur =
+        0;
 
     ctx.fillStyle =
-        "#101b29";
+        "rgba(0,217,255,0.08)";
 
     ctx.strokeStyle =
-        "#ffffff";
+        "rgba(0,217,255,0.45)";
 
-    ctx.lineWidth = 1;
+    ctx.lineWidth =
+        1;
 
-    ctx.fillRect(
-        -5,
-        -8,
-        14,
-        16
+    ctx.beginPath();
+
+    ctx.moveTo(
+        11,
+        -10
     );
 
-    ctx.strokeRect(
-        -5,
-        -8,
-        14,
-        16
+    ctx.lineTo(
+        1,
+        -14
     );
 
+    ctx.lineTo(
+        -11,
+        -11
+    );
 
-    // AI eye
+    ctx.lineTo(
+        -16,
+        0
+    );
 
-    ctx.fillStyle =
+    ctx.lineTo(
+        -11,
+        11
+    );
+
+    ctx.lineTo(
+        1,
+        14
+    );
+
+    ctx.lineTo(
+        11,
+        10
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+    ctx.stroke();
+
+
+    // ================================================
+    // LEFT ARM
+    // ================================================
+
+    ctx.strokeStyle =
         "#00d9ff";
 
-    ctx.shadowBlur = 12;
+    ctx.lineWidth =
+        3;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -10,
+        -12
+    );
+
+    ctx.lineTo(
+        -22,
+        -20
+    );
+
+    ctx.lineTo(
+        -28,
+        -15
+    );
+
+    ctx.stroke();
+
+
+    // ================================================
+    // RIGHT ARM
+    // ================================================
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -10,
+        12
+    );
+
+    ctx.lineTo(
+        -22,
+        20
+    );
+
+    ctx.lineTo(
+        -28,
+        15
+    );
+
+    ctx.stroke();
+
+
+    // ================================================
+    // ROBOT HEAD
+    // ================================================
+
+    ctx.shadowBlur =
+        18;
 
     ctx.shadowColor =
         "#00d9ff";
 
+    ctx.fillStyle =
+        "#101f31";
+
+    ctx.strokeStyle =
+        "#ffffff";
+
+    ctx.lineWidth =
+        1.5;
+
     ctx.fillRect(
-        4,
-        -3,
-        7,
-        6
+        -2,
+        -11,
+        15,
+        22
+    );
+
+    ctx.strokeRect(
+        -2,
+        -11,
+        15,
+        22
     );
 
 
-    // Boost flame
+    // ================================================
+    // ANTENNA
+    // ================================================
+
+    ctx.strokeStyle =
+        "#00d9ff";
+
+    ctx.lineWidth =
+        1.5;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        5,
+        -11
+    );
+
+    ctx.lineTo(
+        5,
+        -19
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle =
+        "#35ff9c";
+
+    ctx.shadowBlur =
+        15;
+
+    ctx.shadowColor =
+        "#35ff9c";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        5,
+        -21,
+        2.5 + pulse * 0.3,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    // ================================================
+    // AI VISOR
+    // ================================================
+
+    ctx.shadowBlur =
+        20;
+
+    ctx.shadowColor =
+        "#00d9ff";
+
+    ctx.fillStyle =
+        "#00d9ff";
+
+    ctx.fillRect(
+        2,
+        -4,
+        10,
+        5
+    );
+
+
+    // ================================================
+    // VISOR HIGHLIGHT
+    // ================================================
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.globalAlpha *=
+        0.8;
+
+    ctx.fillRect(
+        3,
+        -3,
+        3,
+        1
+    );
+
+
+    // ================================================
+    // NEURAL CORE
+    // ================================================
+
+    ctx.globalAlpha =
+        1;
+
+    ctx.shadowBlur =
+        30;
+
+    ctx.shadowColor =
+        "#35ff9c";
+
+    ctx.fillStyle =
+        "#35ff9c";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -5,
+        0,
+        5 + pulse * 0.4,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    // ================================================
+    // CORE CENTER
+    // ================================================
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -5,
+        0,
+        2,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    // ================================================
+    // STATUS LIGHTS
+    // ================================================
+
+    ctx.shadowBlur =
+        12;
+
+    ctx.shadowColor =
+        "#00d9ff";
+
+    ctx.fillStyle =
+        "#00d9ff";
+
+    ctx.fillRect(
+        -13,
+        -4,
+        2,
+        2
+    );
+
+    ctx.fillRect(
+        -13,
+        2,
+        2,
+        2
+    );
+
+
+    // ================================================
+    // SHIELD ARC
+    // ================================================
+
+    ctx.shadowBlur =
+        12;
+
+    ctx.shadowColor =
+        "#00d9ff";
+
+    ctx.strokeStyle =
+        "rgba(0,217,255,0.5)";
+
+    ctx.lineWidth =
+        1;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        0,
+        29 + pulse,
+        -1.2,
+        1.2
+    );
+
+    ctx.stroke();
+
+
+    // ================================================
+    // BOOST PARTICLES
+    // ================================================
 
     if (player.boost) {
 
-        ctx.fillStyle =
-            "#00d9ff";
+        for (
+            let i = 0;
+            i < 3;
+            i++
+        ) {
 
-        ctx.beginPath();
+            const px =
+                -20 -
+                Math.random() * 18;
 
-        ctx.moveTo(
-            -13,
-            0
-        );
+            const py =
+                (Math.random() - 0.5) * 12;
 
-        ctx.lineTo(
-            -30,
-            -6
-        );
+            ctx.fillStyle =
+                "#00d9ff";
 
-        ctx.lineTo(
-            -25,
-            0
-        );
+            ctx.shadowBlur =
+                15;
 
-        ctx.lineTo(
-            -30,
-            6
-        );
+            ctx.beginPath();
 
-        ctx.closePath();
+            ctx.arc(
+                px,
+                py,
+                1.5 +
+                Math.random() * 2,
+                0,
+                Math.PI * 2
+            );
 
-        ctx.fill();
+            ctx.fill();
+        }
     }
 
 
     ctx.restore();
 }
-
 
 // ================================================
 // DRAW PARTICLES
