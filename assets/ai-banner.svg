@@ -1,1 +1,106 @@
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" />
+      <stop offset="50%" />
+      <stop offset="100%" />
+    </linearGradient>
+
+    <linearGradient id="text" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%">
+        <animate attributeName="stop-color"
+          values="#6f42c1;#00d9ff;#6f42c1" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%">
+        <animate attributeName="stop-color"
+          values="#00d9ff;#6f42c1;#00d9ff" dur="4s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="300" rx="25" fill="url(#bg)" />
+
+  <!-- Animated particles -->
+  <g fill="#00d9ff" opacity="0.7">
+    <circle cx="100" cy="80" r="3">
+      <animate attributeName="cy" values="80;220;80" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="220" r="3">
+      <animate attributeName="cy" values="220;60;220" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="950" cy="70" r="3">
+      <animate attributeName="cy" values="70;230;70" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1080" cy="220" r="3">
+      <animate attributeName="cy" values="220;60;220" dur="5.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Neural network -->
+  <g stroke="#6f42c1" stroke-width="2" opacity="0.6">
+    <line x1="120" y1="150" x2="200" y2="100"/>
+    <line x1="120" y1="150" x2="200" y2="200"/>
+    <line x1="200" y1="100" x2="300" y2="150"/>
+    <line x1="200" y1="200" x2="300" y2="150"/>
+    <line x1="900" y1="150" x2="1000" y2="100"/>
+    <line x1="900" y1="150" x2="1000" y2="200"/>
+    <line x1="1000" y1="100" x2="1080" y2="150"/>
+    <line x1="1000" y1="200" x2="1080" y2="150"/>
+  </g>
+
+  <g fill="#00d9ff" filter="url(#glow)">
+    <circle cx="120" cy="150" r="7">
+      <animate attributeName="r" values="5;9;5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="100" r="7"/>
+    <circle cx="200" cy="200" r="7"/>
+    <circle cx="300" cy="150" r="7"/>
+    <circle cx="900" cy="150" r="7"/>
+    <circle cx="1000" cy="100" r="7"/>
+    <circle cx="1000" cy="200" r="7"/>
+    <circle cx="1080" cy="150" r="7"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="600" y="125"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="52"
+        font-weight="bold"
+        fill="url(#text)">
+    SUBRAMANI U
+  </text>
+
+  <text x="600" y="170"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="24"
+        fill="white">
+    AI &amp; DATA SCIENCE • AI/ML • COMPUTER VISION
+  </text>
+
+  <text x="600" y="215"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="18"
+        fill="#b8c7d9">
+    Building • Learning • Improving
+  </text>
+
+  <!-- Scanning line -->
+  <rect x="350" y="230" width="500" height="2" fill="#00d9ff">
+    <animate attributeName="x"
+      values="350;850;350"
+      dur="3s"
+      repeatCount="indefinite"/>
+  </rect>
+</svg>
