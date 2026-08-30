@@ -40,9 +40,15 @@ MySQL • Git • GitHub • VS Code • Jupyter Notebook • Google Colab
 
 ---
 
-## Featured Projects
+## GitHub Analytics
 
-Coming next.
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=subramani2006&show_icons=true&theme=tokyonight&hide_border=true" />
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=subramani2006&layout=compact&theme=tokyonight&hide_border=true" />
+
+</div>
 
 ---
 
