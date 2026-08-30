@@ -1,1 +1,79 @@
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 220">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" />
+      <stop offset="100%" />
+    </linearGradient>
+
+    <linearGradient id="glow">
+      <stop offset="0%">
+        <animate attributeName="stop-color"
+          values="#6f42c1;#00d9ff;#6f42c1"
+          dur="3s"
+          repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%">
+        <animate attributeName="stop-color"
+          values="#00d9ff;#6f42c1;#00d9ff"
+          dur="3s"
+          repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="220" rx="25" fill="url(#bg)"/>
+
+  <!-- Animated code brackets -->
+  <text x="100" y="125"
+        font-family="monospace"
+        font-size="90"
+        font-weight="bold"
+        fill="url(#glow)">
+    &lt;/&gt;
+  </text>
+
+  <text x="900" y="125"
+        text-anchor="end"
+        font-family="monospace"
+        font-size="90"
+        font-weight="bold"
+        fill="url(#glow)">
+    { }
+  </text>
+
+  <!-- Main text -->
+  <text x="500" y="90"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="34"
+        font-weight="bold"
+        fill="white">
+    CODE • LEARN • BUILD
+  </text>
+
+  <text x="500" y="135"
+        text-anchor="middle"
+        font-family="monospace"
+        font-size="20"
+        fill="#b8c7d9">
+    Python • C++ • SQL • Machine Learning
+  </text>
+
+  <!-- Animated cursor -->
+  <rect x="705" y="113" width="3" height="25" fill="#00d9ff">
+    <animate attributeName="opacity"
+      values="1;0;1"
+      dur="0.8s"
+      repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Animated progress line -->
+  <rect x="250" y="170" width="500" height="3" rx="2" fill="#333"/>
+  <rect x="250" y="170" width="80" height="3" rx="2" fill="#00d9ff">
+    <animate attributeName="width"
+      values="80;500;80"
+      dur="4s"
+      repeatCount="indefinite"/>
+  </rect>
+</svg>
