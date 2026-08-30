@@ -1,10 +1,10 @@
 <div align="center">
 
-# 👋 Hi, I'm Subramani U
+<img src="https://capsule-render.vercel.app/api?type=waving&height=220&section=header&text=Subramani%20U&fontSize=60&fontAlignY=35&animation=twinkling&desc=AI%20%26%20Data%20Science%20Student&descAlignY=60&descSize=22" width="100%"/>
 
-### AI & Data Science Student | AI/ML | Computer Vision | Data Analytics
+<br>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=2500&pause=800&color=6F42C1&center=true&vCenter=true&width=850&lines=AI+%26+Data+Science+Student;Machine+Learning+%7C+Deep+Learning;Computer+Vision+Developer;Data+Analytics+Enthusiast;Exploring+Generative+AI+%26+LLMs)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=25&duration=2200&pause=700&color=6F42C1&center=true&vCenter=true&width=850&lines=AI+%26+Data+Science+Student;Machine+Learning+Enthusiast;Deep+Learning+Explorer;Computer+Vision+Developer;Data+Analytics+Enthusiast;Exploring+Generative+AI+%26+LLMs)](https://git.io/typing-svg)
 
 <br>
 
@@ -15,7 +15,7 @@
 <br>
 
 ![Profile Views](https://komarev.com/ghpvc/?username=subramani2006&style=for-the-badge&color=6F42C1)
-![GitHub Followers](https://img.shields.io/github/followers/subramani2006?style=for-the-badge&logo=github&label=Followers)
+![Followers](https://img.shields.io/github/followers/subramani2006?style=for-the-badge&logo=github&label=Followers)
 
 </div>
 
@@ -38,33 +38,33 @@ B.Tech Artificial Intelligence and Data Science student passionate about buildin
 
 ### 💻 Languages
 
-<p>
-<img src="https://skillicons.dev/icons?i=python,cpp,mysql" />
+<p align="center">
+<img src="https://skillicons.dev/icons?i=python,cpp,mysql&perline=6" />
 </p>
 
 ### 🤖 AI / Machine Learning
 
-<p>
-<img src="https://skillicons.dev/icons?i=tensorflow,sklearn" />
+<p align="center">
+<img src="https://skillicons.dev/icons?i=tensorflow,sklearn&perline=6" />
 </p>
 
 ### 📊 Data & Computer Vision
 
-<p>
-<img src="https://skillicons.dev/icons?i=numpy,pandas,opencv" />
+<p align="center">
+<img src="https://skillicons.dev/icons?i=numpy,pandas,opencv&perline=6" />
 </p>
 
 ### 🔧 Developer Tools
 
-<p>
-<img src="https://skillicons.dev/icons?i=git,github,vscode,jupyter" />
+<p align="center">
+<img src="https://skillicons.dev/icons?i=git,github,vscode,jupyter&perline=6" />
 </p>
 
 ---
 
 ## 🧠 AI / ML Expertise
 
-| Domain | Level | Focus |
+| Domain | Proficiency | Focus |
 |---|---|---|
 | 🤖 Machine Learning | Intermediate | Model development & evaluation |
 | 🧠 Deep Learning | Intermediate | TensorFlow, Keras, Neural Networks |
@@ -79,24 +79,22 @@ B.Tech Artificial Intelligence and Data Science student passionate about buildin
 ### 🌱 Plant Disease Classification
 
 <details>
-<summary><b>View Project Details</b></summary>
+<summary><b>🔍 View Project Details</b></summary>
 
 ### Transfer Learning Framework for Automated Plant Disease Classification
 
 Deep learning application for identifying plant diseases from leaf images using transfer learning with pre-trained CNN models.
 
-**Tech Stack:**  
+**Tech Stack**
+
 `Python` `TensorFlow` `Keras` `OpenCV`
 
-**Key Work:**
+**Key Work**
 
 - Applied transfer learning using pre-trained CNN models
 - Implemented image preprocessing and augmentation
 - Developed disease prediction functionality
 - Focused on improving model performance
-
-**Repository:**  
-[🔗 View Project](https://github.com/subramani2006)
 
 </details>
 
@@ -105,25 +103,23 @@ Deep learning application for identifying plant diseases from leaf images using 
 ### 🚗 Driver Drowsiness Detection
 
 <details>
-<summary><b>View Project Details</b></summary>
+<summary><b>🔍 View Project Details</b></summary>
 
 ### Vision-Based Driver Drowsiness Detection & Safety Monitoring System
 
 AI-powered computer vision system designed to detect driver drowsiness in real time by monitoring eye closure, blinking, and yawning.
 
-**Tech Stack:**  
+**Tech Stack**
+
 `Python` `OpenCV` `MediaPipe` `TensorFlow`
 
-**Key Work:**
+**Key Work**
 
 - Implemented facial landmark detection using MediaPipe
 - Monitored eye closure and blink patterns
 - Detected yawning using computer vision techniques
 - Integrated TensorFlow into the detection workflow
 - Implemented a real-time alert mechanism
-
-**Repository:**  
-[🔗 View Project](https://github.com/subramani2006)
 
 </details>
 
@@ -132,16 +128,17 @@ AI-powered computer vision system designed to detect driver drowsiness in real t
 ### 🎓 Student Performance Analysis
 
 <details>
-<summary><b>View Project Details</b></summary>
+<summary><b>🔍 View Project Details</b></summary>
 
 ### Student Performance Analysis
 
 Data analytics project focused on analyzing student performance and identifying students who may require additional academic support.
 
-**Tech Stack:**  
+**Tech Stack**
+
 `Python` `Pandas` `NumPy` `Matplotlib`
 
-**Key Work:**
+**Key Work**
 
 - Cleaned and prepared the dataset
 - Performed exploratory data analysis
@@ -150,7 +147,8 @@ Data analytics project focused on analyzing student performance and identifying 
 - Identified at-risk students
 - Derived actionable insights
 
-**Repository:**  
+**Repository**
+
 [🔗 View Project](https://github.com/subramani2006/student_performance_in_exams)
 
 </details>
@@ -160,16 +158,17 @@ Data analytics project focused on analyzing student performance and identifying 
 ### 🛒 E-Commerce Sales Analysis
 
 <details>
-<summary><b>View Project Details</b></summary>
+<summary><b>🔍 View Project Details</b></summary>
 
 ### E-Commerce Sales Analysis
 
 Data analytics project focused on analyzing sales performance, customer behavior, regional trends, and business opportunities.
 
-**Tech Stack:**  
+**Tech Stack**
+
 `Python` `Pandas` `NumPy` `Matplotlib`
 
-**Key Work:**
+**Key Work**
 
 - Cleaned and prepared sales datasets
 - Analyzed revenue and sales performance
@@ -178,7 +177,8 @@ Data analytics project focused on analyzing sales performance, customer behavior
 - Analyzed customer reviews
 - Generated actionable business insights
 
-**Repository:**  
+**Repository**
+
 [🔗 View Project](https://github.com/subramani2006/Ecommerce_Sales_Analysis)
 
 </details>
@@ -195,8 +195,7 @@ Data analytics project focused on analyzing sales performance, customer behavior
 - Applied Python and machine learning techniques to project-based tasks
 - Strengthened practical understanding of AI/ML workflows
 
-**Skills:**  
-`Python` `Machine Learning` `Artificial Intelligence`
+**Skills:** `Python` `Machine Learning` `Artificial Intelligence`
 
 ---
 
@@ -208,8 +207,7 @@ Data analytics project focused on analyzing sales performance, customer behavior
 - Performed data cleaning, exploratory data analysis and visualization
 - Used Python-based data analysis tools to derive insights from datasets
 
-**Skills:**  
-`Python` `Pandas` `NumPy` `Matplotlib` `Data Analytics`
+**Skills:** `Python` `Pandas` `NumPy` `Matplotlib` `Data Analytics`
 
 ---
 
@@ -217,7 +215,7 @@ Data analytics project focused on analyzing sales performance, customer behavior
 
 <div align="center">
 
-| 🏅 Achievement | 📌 Details |
+| 🏅 Recognition | 📌 Details |
 |---|---|
 | 🎓 Academic Achievement | **97.50%** in Higher Secondary Education |
 | 🏆 School Achievement | **100%** in 10th Standard |
@@ -281,7 +279,6 @@ Open To:
   - AI/ML Internships
   - Software Engineering Internships
   - Collaboration on AI projects
-
 ---
 
 ## Connect With Me
