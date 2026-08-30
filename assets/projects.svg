@@ -1,1 +1,202 @@
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260">
+
+  <defs>
+
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" />
+      <stop offset="100%" />
+    </linearGradient>
+
+    <linearGradient id="line">
+      <stop offset="0%">
+        <animate
+          attributeName="stop-color"
+          values="#6f42c1;#00d9ff;#6f42c1"
+          dur="4s"
+          repeatCount="indefinite"/>
+      </stop>
+
+      <stop offset="100%">
+        <animate
+          attributeName="stop-color"
+          values="#00d9ff;#6f42c1;#00d9ff"
+          dur="4s"
+          repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+  </defs>
+
+
+  <!-- Background -->
+
+  <rect
+    width="1000"
+    height="260"
+    rx="25"
+    fill="url(#bg)"
+    stroke="#333"
+    stroke-width="2"/>
+
+
+  <!-- Animated project cards -->
+
+  <g stroke="url(#line)" stroke-width="2" fill="none">
+
+    <rect x="80" y="70" width="230" height="120" rx="15">
+      <animate
+        attributeName="y"
+        values="70;60;70"
+        dur="3s"
+        repeatCount="indefinite"/>
+    </rect>
+
+    <rect x="385" y="70" width="230" height="120" rx="15">
+      <animate
+        attributeName="y"
+        values="60;70;60"
+        dur="3s"
+        repeatCount="indefinite"/>
+    </rect>
+
+    <rect x="690" y="70" width="230" height="120" rx="15">
+      <animate
+        attributeName="y"
+        values="70;60;70"
+        dur="3s"
+        repeatCount="indefinite"/>
+    </rect>
+
+  </g>
+
+
+  <!-- Project icons -->
+
+  <g fill="url(#line)" filter="url(#glow)">
+
+    <circle cx="195" cy="105" r="18">
+      <animate
+        attributeName="r"
+        values="15;21;15"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="500" cy="105" r="18">
+      <animate
+        attributeName="r"
+        values="21;15;21"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="805" cy="105" r="18">
+      <animate
+        attributeName="r"
+        values="15;21;15"
+        dur="2s"
+        repeatCount="indefinite"/>
+    </circle>
+
+  </g>
+
+
+  <!-- Project titles -->
+
+  <g
+    font-family="Arial, sans-serif"
+    font-size="18"
+    font-weight="bold"
+    fill="white"
+    text-anchor="middle">
+
+    <text x="195" y="150">
+      PLANT DISEASE
+    </text>
+
+    <text x="500" y="150">
+      DROWSINESS
+    </text>
+
+    <text x="805" y="150">
+      DATA ANALYTICS
+    </text>
+
+  </g>
+
+
+  <!-- Project technologies -->
+
+  <g
+    font-family="monospace"
+    font-size="12"
+    fill="#b8c7d9"
+    text-anchor="middle">
+
+    <text x="195" y="172">
+      TensorFlow • OpenCV
+    </text>
+
+    <text x="500" y="172">
+      MediaPipe • OpenCV
+    </text>
+
+    <text x="805" y="172">
+      Pandas • NumPy
+    </text>
+
+  </g>
+
+
+  <!-- Heading -->
+
+  <text
+    x="500"
+    y="42"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="24"
+    font-weight="bold"
+    fill="url(#line)">
+
+    PROJECTS • BUILD • INNOVATE
+
+  </text>
+
+
+  <!-- Animated connection line -->
+
+  <rect
+    x="200"
+    y="215"
+    width="600"
+    height="3"
+    rx="2"
+    fill="#333"/>
+
+  <rect
+    x="200"
+    y="215"
+    width="100"
+    height="3"
+    rx="2"
+    fill="#00d9ff">
+
+    <animate
+      attributeName="x"
+      values="200;700;200"
+      dur="4s"
+      repeatCount="indefinite"/>
+
+  </rect>
+
+</svg>
