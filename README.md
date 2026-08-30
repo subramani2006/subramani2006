@@ -52,6 +52,16 @@ MySQL • Git • GitHub • VS Code • Jupyter Notebook • Google Colab
 
 ---
 
+## GitHub Streak
+
+<div align="center">
+
+<img src="https://streak-stats.demolab.com?user=subramani2006&theme=tokyonight&hide_border=true" />
+
+</div>
+
+---
+
 ## Certifications
 
 - Pluto Academy — Artificial Intelligence & Machine Learning Internship
