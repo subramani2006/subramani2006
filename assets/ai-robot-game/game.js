@@ -1,4 +1,3 @@
-
 "use strict";
 
 /*
@@ -61,18 +60,38 @@ function resizeCanvas() {
     width = window.innerWidth;
     height = window.innerHeight;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr =
+        Math.min(
+            window.devicePixelRatio || 1,
+            2
+        );
 
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+    canvas.width =
+        width * dpr;
 
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
+    canvas.height =
+        height * dpr;
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    canvas.style.width =
+        `${width}px`;
+
+    canvas.style.height =
+        `${height}px`;
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
 }
 
-window.addEventListener("resize", resizeCanvas);
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
 
 resizeCanvas();
 
@@ -112,7 +131,6 @@ const game = {
     lastTime: 0,
 
     timerAccumulator: 0
-
 };
 
 
@@ -143,7 +161,6 @@ const player = {
     boost: false,
 
     invulnerable: 0
-
 };
 
 
@@ -153,25 +170,45 @@ const player = {
 
 const keys = {};
 
-window.addEventListener("keydown", (event) => {
+window.addEventListener(
+    "keydown",
+    (event) => {
 
-    keys[event.key.toLowerCase()] = true;
+        keys[
+            event.key.toLowerCase()
+        ] = true;
 
-    if (
-        ["arrowup", "arrowdown", "arrowleft", "arrowright", " "]
-            .includes(event.key.toLowerCase())
-    ) {
-        event.preventDefault();
+        if (
+            [
+                "arrowup",
+                "arrowdown",
+                "arrowleft",
+                "arrowright",
+                " "
+            ].includes(
+                event.key.toLowerCase()
+            )
+        ) {
+            event.preventDefault();
+        }
+
+        if (
+            event.key.toLowerCase() === "p"
+        ) {
+            togglePause();
+        }
     }
+);
 
-    if (event.key.toLowerCase() === "p") {
-        togglePause();
+window.addEventListener(
+    "keyup",
+    (event) => {
+
+        keys[
+            event.key.toLowerCase()
+        ] = false;
     }
-});
-
-window.addEventListener("keyup", (event) => {
-    keys[event.key.toLowerCase()] = false;
-});
+);
 
 
 // ================================================
@@ -207,12 +244,20 @@ const world = {
 // ================================================
 
 function random(min, max) {
-    return Math.random() * (max - min) + min;
+
+    return Math.random() *
+        (max - min) +
+        min;
 }
 
+
 function randomInt(min, max) {
-    return Math.floor(random(min, max + 1));
+
+    return Math.floor(
+        random(min, max + 1)
+    );
 }
+
 
 function distance(a, b) {
 
@@ -222,13 +267,28 @@ function distance(a, b) {
     );
 }
 
-function clamp(value, min, max) {
-    return Math.max(min, Math.min(max, value));
+
+function clamp(
+    value,
+    min,
+    max
+) {
+
+    return Math.max(
+        min,
+        Math.min(max, value)
+    );
 }
+
 
 function formatScore(value) {
 
-    return String(Math.floor(value)).padStart(6, "0");
+    return String(
+        Math.floor(value)
+    ).padStart(
+        6,
+        "0"
+    );
 }
 
 
@@ -238,17 +298,28 @@ function formatScore(value) {
 
 let notificationTimer;
 
+
 function showNotification(text) {
 
-    notification.textContent = text;
+    notification.textContent =
+        text;
 
-    notification.classList.add("show");
+    notification.classList.add(
+        "show"
+    );
 
-    clearTimeout(notificationTimer);
+    clearTimeout(
+        notificationTimer
+    );
 
-    notificationTimer = setTimeout(() => {
-        notification.classList.remove("show");
-    }, 1800);
+    notificationTimer =
+        setTimeout(() => {
+
+            notification.classList.remove(
+                "show"
+            );
+
+        }, 1800);
 }
 
 
@@ -266,26 +337,65 @@ function createWorld() {
     world.portals = [];
     world.scanLines = [];
 
-    // Stars
 
-    for (let i = 0; i < 180; i++) {
+    // ============================================
+    // STARS
+    // ============================================
+
+    for (
+        let i = 0;
+        i < 180;
+        i++
+    ) {
 
         world.stars.push({
-            x: random(0, width),
-            y: random(0, height),
-            size: random(0.5, 2),
-            alpha: random(0.15, 0.8),
-            speed: random(0.1, 0.6)
+
+            x:
+                random(
+                    0,
+                    width
+                ),
+
+            y:
+                random(
+                    0,
+                    height
+                ),
+
+            size:
+                random(
+                    0.5,
+                    2
+                ),
+
+            alpha:
+                random(
+                    0.15,
+                    0.8
+                ),
+
+            speed:
+                random(
+                    0.1,
+                    0.6
+                )
         });
     }
 
 
-    // Obstacles
+    // ============================================
+    // OBSTACLES
+    // ============================================
 
     const obstacleCount =
-        16 + game.level * 3;
+        16 +
+        game.level * 3;
 
-    for (let i = 0; i < obstacleCount; i++) {
+    for (
+        let i = 0;
+        i < obstacleCount;
+        i++
+    ) {
 
         let obstacle;
 
@@ -293,76 +403,142 @@ function createWorld() {
 
         let attempts = 0;
 
-        while (!safe && attempts < 100) {
+        while (
+            !safe &&
+            attempts < 100
+        ) {
 
             obstacle = {
 
-                x: random(80, width - 80),
+                x:
+                    random(
+                        80,
+                        width - 80
+                    ),
 
-                y: random(100, height - 100),
+                y:
+                    random(
+                        100,
+                        height - 100
+                    ),
 
-                w: random(40, 110),
+                w:
+                    random(
+                        40,
+                        110
+                    ),
 
-                h: random(30, 90)
-
+                h:
+                    random(
+                        30,
+                        90
+                    )
             };
 
-            const dx = obstacle.x - player.x;
-            const dy = obstacle.y - player.y;
+
+            const dx =
+                obstacle.x -
+                player.x;
+
+            const dy =
+                obstacle.y -
+                player.y;
+
 
             safe =
-                Math.hypot(dx, dy) > 150;
+                Math.hypot(
+                    dx,
+                    dy
+                ) > 150;
 
             attempts++;
         }
 
+
         if (safe) {
-            world.obstacles.push(obstacle);
+
+            world.obstacles.push(
+                obstacle
+            );
         }
     }
 
 
-    // Energy cores
+    // ============================================
+    // ENERGY CORES
+    // ============================================
 
-    for (let i = 0; i < game.objectiveTotal; i++) {
+    for (
+        let i = 0;
+        i < game.objectiveTotal;
+        i++
+    ) {
 
         spawnCore();
     }
 
 
-    // Drones
+    // ============================================
+    // DRONES
+    // ============================================
 
     const droneCount =
-        3 + game.level * 2;
+        3 +
+        game.level * 2;
 
-    for (let i = 0; i < droneCount; i++) {
+    for (
+        let i = 0;
+        i < droneCount;
+        i++
+    ) {
 
         spawnDrone();
     }
 
 
-    // Portals
+    // ============================================
+    // PORTAL
+    // ============================================
 
     world.portals.push({
 
-        x: width - 100,
+        x:
+            width - 100,
 
-        y: height - 100,
+        y:
+            height - 100,
 
-        radius: 35,
+        radius:
+            35,
 
-        pulse: 0
-
+        pulse:
+            0
     });
 
 
-    // Scan lines
+    // ============================================
+    // SCAN LINES
+    // ============================================
 
-    for (let i = 0; i < 5; i++) {
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
 
         world.scanLines.push({
-            y: random(0, height),
-            speed: random(20, 60)
+
+            y:
+                random(
+                    0,
+                    height
+                ),
+
+            speed:
+                random(
+                    20,
+                    60
+                )
         });
     }
 }
@@ -380,44 +556,81 @@ function spawnCore() {
 
     let attempts = 0;
 
-    while (!valid && attempts < 100) {
+
+    while (
+        !valid &&
+        attempts < 100
+    ) {
 
         position = {
 
-            x: random(70, width - 70),
+            x:
+                random(
+                    70,
+                    width - 70
+                ),
 
-            y: random(100, height - 70),
+            y:
+                random(
+                    100,
+                    height - 70
+                ),
 
-            radius: 10,
+            radius:
+                10,
 
-            pulse: random(0, Math.PI * 2)
-
+            pulse:
+                random(
+                    0,
+                    Math.PI * 2
+                )
         };
+
 
         valid = true;
 
-        for (const obstacle of world.obstacles) {
+
+        for (
+            const obstacle
+            of world.obstacles
+        ) {
 
             if (
+
                 position.x >
                     obstacle.x - 25 &&
+
                 position.x <
-                    obstacle.x + obstacle.w + 25 &&
+                    obstacle.x +
+                    obstacle.w +
+                    25 &&
+
                 position.y >
                     obstacle.y - 25 &&
+
                 position.y <
-                    obstacle.y + obstacle.h + 25
+                    obstacle.y +
+                    obstacle.h +
+                    25
+
             ) {
+
                 valid = false;
+
                 break;
             }
         }
 
+
         attempts++;
     }
 
+
     if (valid) {
-        world.cores.push(position);
+
+        world.cores.push(
+            position
+        );
     }
 }
 
@@ -428,48 +641,99 @@ function spawnCore() {
 
 function spawnDrone() {
 
-    const side = randomInt(0, 3);
+    const side =
+        randomInt(
+            0,
+            3
+        );
 
     let x;
     let y;
 
+
     if (side === 0) {
+
         x = -30;
-        y = random(80, height - 80);
+
+        y =
+            random(
+                80,
+                height - 80
+            );
     }
+
 
     else if (side === 1) {
-        x = width + 30;
-        y = random(80, height - 80);
+
+        x =
+            width + 30;
+
+        y =
+            random(
+                80,
+                height - 80
+            );
     }
 
+
     else if (side === 2) {
-        x = random(50, width - 50);
+
+        x =
+            random(
+                50,
+                width - 50
+            );
+
         y = -30;
     }
 
+
     else {
-        x = random(50, width - 50);
-        y = height + 30;
+
+        x =
+            random(
+                50,
+                width - 50
+            );
+
+        y =
+            height + 30;
     }
+
 
     world.drones.push({
 
         x,
+
         y,
 
-        radius: 14,
+        radius:
+            14,
 
-        speed: random(35, 65) + game.level * 5,
+        speed:
+            random(
+                35,
+                65
+            ) +
+            game.level * 5,
 
-        angle: 0,
+        angle:
+            0,
 
-        health: 100,
+        health:
+            100,
 
-        pulse: random(0, Math.PI * 2),
+        pulse:
+            random(
+                0,
+                Math.PI * 2
+            ),
 
-        orbit: random(0, Math.PI * 2)
-
+        orbit:
+            random(
+                0,
+                Math.PI * 2
+            )
     });
 }
 
@@ -487,35 +751,53 @@ function createParticle(
     const particle = {
 
         x,
+
         y,
 
         vx:
             options.vx ??
-            random(-50, 50),
+            random(
+                -50,
+                50
+            ),
 
         vy:
             options.vy ??
-            random(-50, 50),
+            random(
+                -50,
+                50
+            ),
 
         life:
             options.life ??
-            random(0.4, 1),
+            random(
+                0.4,
+                1
+            ),
 
         maxLife:
             options.life ??
-            random(0.4, 1),
+            random(
+                0.4,
+                1
+            ),
 
         size:
             options.size ??
-            random(1, 4),
+            random(
+                1,
+                4
+            ),
 
         type:
             options.type ??
             "energy"
-
     };
 
-    world.particles.push(particle);
+
+    world.particles.push(
+        particle
+    );
 }
 
 
@@ -529,21 +811,45 @@ function explosion(
     amount = 25
 ) {
 
-    for (let i = 0; i < amount; i++) {
+    for (
+        let i = 0;
+        i < amount;
+        i++
+    ) {
 
-        createParticle(x, y, {
+        createParticle(
+            x,
+            y,
+            {
 
-            vx: random(-160, 160),
+                vx:
+                    random(
+                        -160,
+                        160
+                    ),
 
-            vy: random(-160, 160),
+                vy:
+                    random(
+                        -160,
+                        160
+                    ),
 
-            life: random(0.4, 1.2),
+                life:
+                    random(
+                        0.4,
+                        1.2
+                    ),
 
-            size: random(1, 4),
+                size:
+                    random(
+                        1,
+                        4
+                    ),
 
-            type: "explosion"
-
-        });
+                type:
+                    "explosion"
+            }
+        );
     }
 }
 
@@ -580,9 +886,14 @@ function resetGame() {
 
     game.shake = 0;
 
-    player.x = width / 2;
+    game.timerAccumulator = 0;
 
-    player.y = height / 2;
+
+    player.x =
+        width / 2;
+
+    player.y =
+        height / 2;
 
     player.vx = 0;
 
@@ -592,33 +903,67 @@ function resetGame() {
 
     player.trail = [];
 
+    player.boost = false;
+
     player.invulnerable = 0;
+
 
     createWorld();
 
     updateHUD();
 
-    showNotification("NEURAL CORE INITIALIZED");
+    showNotification(
+        "NEURAL CORE INITIALIZED"
+    );
 
-    requestAnimationFrame(gameLoop);
+
+    requestAnimationFrame(
+        gameLoop
+    );
 }
 
 
 // ================================================
-// START
+// START GAME
 // ================================================
 
 function startGame() {
 
-    startScreen.classList.remove("active");
+    startScreen.classList.remove(
+        "active"
+    );
 
-    gameOverScreen.classList.remove("active");
+    gameOverScreen.classList.remove(
+        "active"
+    );
 
-    victoryScreen.classList.remove("active");
+    victoryScreen.classList.remove(
+        "active"
+    );
 
-    gameScreen.classList.add("active");
+    gameScreen.classList.add(
+        "active"
+    );
+
 
     resetGame();
+
+
+    /*
+     IMPORTANT:
+     resetGame() already starts
+     the animation loop.
+
+     We therefore do NOT call
+     requestAnimationFrame() here.
+    */
+
+    game.running = true;
+
+    game.paused = false;
+
+    game.lastTime =
+        performance.now();
 }
 
 
@@ -629,22 +974,80 @@ function startGame() {
 function togglePause() {
 
     if (!game.running) {
+
         return;
     }
 
-    game.paused = !game.paused;
+
+    game.paused =
+        !game.paused;
+
 
     pauseOverlay.classList.toggle(
         "active",
         game.paused
     );
 
+
     if (!game.paused) {
 
-        game.lastTime = performance.now();
+        game.lastTime =
+            performance.now();
 
-        requestAnimationFrame(gameLoop);
+        requestAnimationFrame(
+            gameLoop
+        );
     }
+}
+
+
+// ================================================
+// RESUME BUTTON
+// ================================================
+
+if (resumeButton) {
+
+    resumeButton.addEventListener(
+        "click",
+        () => {
+
+            if (game.paused) {
+
+                togglePause();
+            }
+        }
+    );
+}
+
+
+// ================================================
+// START / RESTART BUTTONS
+// ================================================
+
+if (startButton) {
+
+    startButton.addEventListener(
+        "click",
+        startGame
+    );
+}
+
+
+if (restartButton) {
+
+    restartButton.addEventListener(
+        "click",
+        startGame
+    );
+}
+
+
+if (victoryRestart) {
+
+    victoryRestart.addEventListener(
+        "click",
+        startGame
+    );
 }
 
 
@@ -656,6 +1059,9 @@ function updatePlayer(dt) {
 
     let dx = 0;
     let dy = 0;
+
+
+    // Keyboard movement
 
     if (
         keys["w"] ||
@@ -685,114 +1091,157 @@ function updatePlayer(dt) {
         dx += 1;
     }
 
-    const magnitude =
-        Math.hypot(dx, dy);
 
-    if (magnitude > 0) {
+    // Normalize diagonal movement
 
-        dx /= magnitude;
-        dy /= magnitude;
+    if (dx !== 0 || dy !== 0) {
 
-        player.boost =
-            keys["shift"] &&
-            game.energy > 0;
-
-        const speed =
-            player.boost
-                ? player.boostSpeed
-                : player.speed;
-
-        player.vx = dx * speed;
-        player.vy = dy * speed;
-
-        player.angle =
-            Math.atan2(dy, dx);
-
-        if (player.boost) {
-
-            game.energy -=
-                18 * dt;
-
-            createParticle(
-                player.x -
-                    Math.cos(player.angle) *
-                    15,
-                player.y -
-                    Math.sin(player.angle) *
-                    15,
-                {
-                    vx: random(-20, 20),
-                    vy: random(-20, 20),
-                    life: 0.35,
-                    size: random(2, 5),
-                    type: "boost"
-                }
+        const length =
+            Math.hypot(
+                dx,
+                dy
             );
-        }
 
-    } else {
-
-        player.vx *= 0.85;
-
-        player.vy *= 0.85;
-
-        player.boost = false;
-
+        dx /= length;
+        dy /= length;
     }
 
-    player.x +=
+
+    // Boost
+
+    player.boost =
+        keys["shift"] &&
+        game.energy > 0 &&
+        (dx !== 0 || dy !== 0);
+
+
+    const currentSpeed =
+        player.boost
+            ? player.boostSpeed
+            : player.speed;
+
+
+    // Energy consumption
+
+    if (player.boost) {
+
+        game.energy -=
+            25 * dt;
+
+        game.energy =
+            clamp(
+                game.energy,
+                0,
+                100
+            );
+    }
+
+    else {
+
+        game.energy +=
+            8 * dt;
+
+        game.energy =
+            clamp(
+                game.energy,
+                0,
+                100
+            );
+    }
+
+
+    // Smooth velocity
+
+    const targetVX =
+        dx * currentSpeed;
+
+    const targetVY =
+        dy * currentSpeed;
+
+
+    const acceleration =
+        10 * dt;
+
+
+    player.vx +=
+        (targetVX - player.vx) *
+        acceleration;
+
+    player.vy +=
+        (targetVY - player.vy) *
+        acceleration;
+
+
+    // Stop when no movement
+
+    if (dx === 0 && dy === 0) {
+
+        player.vx *=
+            Math.max(
+                0,
+                1 - 12 * dt
+            );
+
+        player.vy *=
+            Math.max(
+                0,
+                1 - 12 * dt
+            );
+    }
+
+
+    const nextX =
+        player.x +
         player.vx * dt;
 
-    player.y +=
+    const nextY =
+        player.y +
         player.vy * dt;
 
 
-    // Boundaries
+    // ============================================
+    // OBSTACLE COLLISION
+    // ============================================
 
-    const margin = 30;
-
-    player.x =
-        clamp(
-            player.x,
-            margin,
-            width - margin
-        );
-
-    player.y =
-        clamp(
-            player.y,
-            90,
-            height - 35
-        );
+    let blockedX = false;
+    let blockedY = false;
 
 
-    // Obstacle collision
-
-    for (const obstacle of world.obstacles) {
+    for (
+        const obstacle
+        of world.obstacles
+    ) {
 
         const nearestX =
             clamp(
-                player.x,
+                nextX,
                 obstacle.x,
-                obstacle.x + obstacle.w
+                obstacle.x +
+                    obstacle.w
             );
 
         const nearestY =
             clamp(
-                player.y,
+                nextY,
                 obstacle.y,
-                obstacle.y + obstacle.h
+                obstacle.y +
+                    obstacle.h
             );
 
+
         const distanceX =
-            player.x - nearestX;
+            nextX -
+            nearestX;
 
         const distanceY =
-            player.y - nearestY;
+            nextY -
+            nearestY;
+
 
         const distanceSquared =
             distanceX * distanceX +
             distanceY * distanceY;
+
 
         if (
             distanceSquared <
@@ -800,66 +1249,207 @@ function updatePlayer(dt) {
             player.radius
         ) {
 
-            player.x -=
-                player.vx * dt;
+            blockedX = true;
+            blockedY = true;
 
-            player.y -=
-                player.vy * dt;
+            if (
+                Math.abs(
+                    distanceX
+                ) >
+                Math.abs(
+                    distanceY
+                )
+            ) {
 
-            player.vx *= -0.3;
-            player.vy *= -0.3;
+                blockedY = false;
+            }
 
-            game.shake = 4;
+            else {
+
+                blockedX = false;
+            }
+
+            break;
         }
     }
 
 
-    // Trail
+    if (!blockedX) {
 
-    player.trail.push({
-
-        x: player.x,
-        y: player.y,
-        life: 0.35
-
-    });
-
-    if (player.trail.length > 30) {
-        player.trail.shift();
+        player.x =
+            nextX;
     }
 
-    for (const point of player.trail) {
-        point.life -= dt;
+    else {
+
+        player.vx = 0;
     }
 
 
-    if (game.energy < 100) {
+    if (!blockedY) {
 
-        game.energy +=
-            3 * dt;
+        player.y =
+            nextY;
     }
 
-    game.energy =
+    else {
+
+        player.vy = 0;
+    }
+
+
+    // ============================================
+    // WORLD BOUNDS
+    // ============================================
+
+    player.x =
         clamp(
-            game.energy,
-            0,
-            100
+            player.x,
+            player.radius,
+            width -
+                player.radius
         );
 
-    if (player.invulnerable > 0) {
-        player.invulnerable -= dt;
+    player.y =
+        clamp(
+            player.y,
+            player.radius + 65,
+            height -
+                player.radius
+        );
+
+
+    // ============================================
+    // ROTATION
+    // ============================================
+
+    if (
+        Math.abs(player.vx) >
+            1 ||
+        Math.abs(player.vy) >
+            1
+    ) {
+
+        const targetAngle =
+            Math.atan2(
+                player.vy,
+                player.vx
+            );
+
+        let difference =
+            targetAngle -
+            player.angle;
+
+
+        while (
+            difference >
+            Math.PI
+        ) {
+            difference -=
+                Math.PI * 2;
+        }
+
+
+        while (
+            difference <
+            -Math.PI
+        ) {
+            difference +=
+                Math.PI * 2;
+        }
+
+
+        player.angle +=
+            difference *
+            Math.min(
+                1,
+                dt * 10
+            );
     }
-}
 
 
-// ================================================
-// UPDATE CORES
-// ================================================
+    // ============================================
+    // TRAIL
+    // ============================================
 
-function updateCores(dt) {
+    const moving =
+        Math.abs(player.vx) >
+            5 ||
+        Math.abs(player.vy) >
+            5;
+
+
+    if (moving || player.boost) {
+
+        player.trail.push({
+
+            x:
+                player.x,
+
+            y:
+                player.y,
+
+            life:
+                player.boost
+                    ? 0.45
+                    : 0.30
+        });
+    }
+
 
     for (
-        let i = world.cores.length - 1;
+        let i =
+            player.trail.length - 1;
+        i >= 0;
+        i--
+    ) {
+
+        player.trail[i].life -=
+            dt;
+
+        if (
+            player.trail[i].life <= 0
+        ) {
+
+            player.trail.splice(
+                i,
+                1
+            );
+        }
+    }
+
+
+    if (
+        player.trail.length > 35
+    ) {
+
+        player.trail.splice(
+            0,
+            player.trail.length - 35
+        );
+    }
+
+
+    // ============================================
+    // INVULNERABILITY
+    // ============================================
+
+    if (
+        player.invulnerable > 0
+    ) {
+
+        player.invulnerable -=
+            dt;
+    }
+
+
+    // ============================================
+    // COLLECT CORES
+    // ============================================
+
+    for (
+        let i =
+            world.cores.length - 1;
         i >= 0;
         i--
     ) {
@@ -867,7 +1457,6 @@ function updateCores(dt) {
         const core =
             world.cores[i];
 
-        core.pulse += dt * 4;
 
         if (
             distance(
@@ -876,14 +1465,12 @@ function updateCores(dt) {
             ) <
             player.radius +
             core.radius +
-            5
+            8
         ) {
 
-            collectCore(core);
-
-            world.cores.splice(i, 1);
-
-            spawnCore();
+            collectCore(
+                i
+            );
         }
     }
 }
@@ -893,22 +1480,11 @@ function updateCores(dt) {
 // COLLECT CORE
 // ================================================
 
-function collectCore(core) {
+function collectCore(index) {
 
-    game.cores++;
+    const core =
+        world.cores[index];
 
-    game.collected++;
-
-    game.score += 250;
-
-    game.xp += 150;
-
-    game.energy =
-        clamp(
-            game.energy + 10,
-            0,
-            100
-        );
 
     explosion(
         core.x,
@@ -916,53 +1492,99 @@ function collectCore(core) {
         18
     );
 
-    showNotification(
-        `ENERGY CORE ACQUIRED +250`
+
+    game.cores++;
+
+    game.collected++;
+
+    game.score +=
+        100;
+
+    game.xp +=
+        100;
+
+
+    world.cores.splice(
+        index,
+        1
     );
 
-    checkLevel();
+
+    showNotification(
+        `ENERGY CORE ACQUIRED ${game.cores}/${game.objectiveTotal}`
+    );
+
+
+    // Restore a little energy
+
+    game.energy =
+        clamp(
+            game.energy + 12,
+            0,
+            100
+        );
+
+
+    checkLevelUp();
+
+
+    // Mission complete
 
     if (
-        game.collected >=
+        game.cores >=
         game.objectiveTotal
     ) {
 
-        completeObjective();
+        completeMission();
     }
 }
 
 
 // ================================================
-// OBJECTIVE
+// LEVEL UP
 // ================================================
 
-function completeObjective() {
+function checkLevelUp() {
 
-    if (game.missionComplete) {
-        return;
-    }
+    const requiredXP =
+        game.level * 250;
 
-    game.missionComplete = true;
 
-    game.score += 1000;
+    if (
+        game.xp >=
+        requiredXP
+    ) {
 
-    game.xp += 400;
+        game.xp -=
+            requiredXP;
 
-    showNotification(
-        "PRIMARY OBJECTIVE COMPLETE"
-    );
+        game.level++;
 
-    setTimeout(() => {
 
-        if (!game.running) {
-            return;
-        }
+        game.score +=
+            250;
+
 
         showNotification(
-            "REACH THE NEURAL GATE"
+            `LEVEL ${game.level} REACHED`
         );
 
-    }, 1800);
+
+        // Add stronger threats
+
+        spawnDrone();
+
+        spawnDrone();
+
+
+        // Add more particles
+
+        explosion(
+            player.x,
+            player.y,
+            35
+        );
+    }
 }
 
 
@@ -972,67 +1594,113 @@ function completeObjective() {
 
 function updateDrones(dt) {
 
-    for (const drone of world.drones) {
+    for (
+        const drone
+        of world.drones
+    ) {
 
-        drone.pulse += dt * 4;
+        drone.pulse +=
+            dt * 4;
+
+        drone.orbit +=
+            dt * 1.5;
+
 
         const dx =
-            player.x - drone.x;
+            player.x -
+            drone.x;
 
         const dy =
-            player.y - drone.y;
+            player.y -
+            drone.y;
+
 
         const distanceToPlayer =
-            Math.hypot(dx, dy);
-
-        const direction =
-            Math.atan2(dy, dx);
-
-        drone.angle =
-            direction;
+            Math.hypot(
+                dx,
+                dy
+            );
 
 
-        // Drone movement
+        if (
+            distanceToPlayer >
+            0
+        ) {
 
-        if (distanceToPlayer < 450) {
+            const nx =
+                dx /
+                distanceToPlayer;
 
-            drone.x +=
-                Math.cos(direction) *
-                drone.speed *
-                dt;
+            const ny =
+                dy /
+                distanceToPlayer;
 
-            drone.y +=
-                Math.sin(direction) *
-                drone.speed *
-                dt;
 
-        } else {
-
-            drone.x +=
-                Math.cos(
-                    drone.orbit
-                ) *
-                drone.speed *
-                0.3 *
-                dt;
-
-            drone.y +=
+            const orbitAmount =
                 Math.sin(
                     drone.orbit
                 ) *
+                0.35;
+
+
+            const moveX =
+                nx -
+                ny *
+                orbitAmount;
+
+            const moveY =
+                ny +
+                nx *
+                orbitAmount;
+
+
+            drone.x +=
+                moveX *
                 drone.speed *
-                0.3 *
                 dt;
 
-            drone.orbit +=
-                dt * 0.4;
+            drone.y +=
+                moveY *
+                drone.speed *
+                dt;
+
+
+            drone.angle =
+                Math.atan2(
+                    dy,
+                    dx
+                );
         }
 
 
-        // Player collision
+        // ========================================
+        // WORLD BOUNDS
+        // ========================================
+
+        drone.x =
+            clamp(
+                drone.x,
+                -60,
+                width + 60
+            );
+
+        drone.y =
+            clamp(
+                drone.y,
+                40,
+                height + 60
+            );
+
+
+        // ========================================
+        // PLAYER COLLISION
+        // ========================================
 
         if (
-            distanceToPlayer <
+            distance(
+                player,
+                drone
+            ) <
             player.radius +
             drone.radius
         ) {
@@ -1041,30 +1709,78 @@ function updateDrones(dt) {
                 18
             );
 
-            drone.x -=
-                Math.cos(direction) *
-                50;
 
-            drone.y -=
-                Math.sin(direction) *
-                50;
+            // Push drone away
+
+            const pushX =
+                drone.x -
+                player.x;
+
+            const pushY =
+                drone.y -
+                player.y;
+
+            const pushLength =
+                Math.hypot(
+                    pushX,
+                    pushY
+                ) || 1;
+
+
+            drone.x +=
+                (pushX /
+                    pushLength) *
+                25;
+
+            drone.y +=
+                (pushY /
+                    pushLength) *
+                25;
         }
 
 
-        // Remove distant drones
+        // ========================================
+        // DRONE PARTICLES
+        // ========================================
 
         if (
-            drone.x < -200 ||
-            drone.x > width + 200 ||
-            drone.y < -200 ||
-            drone.y > height + 200
+            Math.random() <
+            dt * 5
         ) {
 
-            drone.x =
-                random(50, width - 50);
+            createParticle(
+                drone.x,
+                drone.y,
+                {
 
-            drone.y =
-                random(100, height - 50);
+                    vx:
+                        random(
+                            -15,
+                            15
+                        ),
+
+                    vy:
+                        random(
+                            -15,
+                            15
+                        ),
+
+                    life:
+                        random(
+                            0.2,
+                            0.5
+                        ),
+
+                    size:
+                        random(
+                            1,
+                            2
+                        ),
+
+                    type:
+                        "drone"
+                }
+            );
         }
     }
 }
@@ -1076,31 +1792,69 @@ function updateDrones(dt) {
 
 function damagePlayer(amount) {
 
-    if (player.invulnerable > 0) {
+    if (
+        player.invulnerable >
+        0
+    ) {
+
         return;
     }
 
-    game.shield -= amount;
 
-    player.invulnerable = 0.8;
+    player.invulnerable =
+        0.8;
 
-    game.shake = 12;
+
+    game.shield -=
+        amount;
+
+
+    game.shield =
+        clamp(
+            game.shield,
+            0,
+            100
+        );
+
+
+    game.shake =
+        10;
+
 
     explosion(
         player.x,
         player.y,
-        8
+        12
     );
+
 
     showNotification(
-        `WARNING: SHIELD -${amount}`
+        `SHIELD IMPACT -${amount}`
     );
 
-    if (game.shield <= 0) {
 
-        game.shield = 0;
+    if (
+        game.shield <= 0
+    ) {
 
-        endGame();
+        gameOver();
+    }
+}
+
+
+// ================================================
+// UPDATE CORES
+// ================================================
+
+function updateCores(dt) {
+
+    for (
+        const core
+        of world.cores
+    ) {
+
+        core.pulse +=
+            dt * 5;
     }
 }
 
@@ -1112,7 +1866,8 @@ function damagePlayer(amount) {
 function updateParticles(dt) {
 
     for (
-        let i = world.particles.length - 1;
+        let i =
+            world.particles.length - 1;
         i >= 0;
         i--
     ) {
@@ -1120,21 +1875,34 @@ function updateParticles(dt) {
         const particle =
             world.particles[i];
 
+
         particle.x +=
             particle.vx * dt;
 
         particle.y +=
             particle.vy * dt;
 
+
         particle.vx *=
-            0.98;
+            Math.pow(
+                0.08,
+                dt
+            );
 
         particle.vy *=
-            0.98;
+            Math.pow(
+                0.08,
+                dt
+            );
 
-        particle.life -= dt;
 
-        if (particle.life <= 0) {
+        particle.life -=
+            dt;
+
+
+        if (
+            particle.life <= 0
+        ) {
 
             world.particles.splice(
                 i,
@@ -1146,132 +1914,211 @@ function updateParticles(dt) {
 
 
 // ================================================
-// TIMER
+// UPDATE STARS
 // ================================================
 
-function updateTimer(dt) {
+function updateStars(dt) {
 
-    game.timerAccumulator += dt;
-
-    if (
-        game.timerAccumulator >= 1
+    for (
+        const star
+        of world.stars
     ) {
 
-        game.timerAccumulator = 0;
+        star.alpha +=
+            Math.sin(
+                performance.now() *
+                0.001 *
+                star.speed
+            ) *
+            dt *
+            0.2;
+    }
+}
 
-        game.time--;
 
-        if (game.time <= 0) {
+// ================================================
+// UPDATE SCAN LINES
+// ================================================
 
-            game.time = 0;
+function updateScanLines(dt) {
 
-            endGame();
+    for (
+        const line
+        of world.scanLines
+    ) {
+
+        line.y +=
+            line.speed *
+            dt;
+
+
+        if (
+            line.y >
+            height
+        ) {
+
+            line.y =
+                60;
         }
     }
 }
 
 
 // ================================================
-// LEVEL SYSTEM
+// UPDATE PORTALS
 // ================================================
 
-function checkLevel() {
+function updatePortals(dt) {
 
-    const requiredXP =
-        game.level * 500;
+    for (
+        const portal
+        of world.portals
+    ) {
 
-    if (game.xp >= requiredXP) {
-
-        game.xp -= requiredXP;
-
-        game.level++;
-
-        player.speed += 8;
-
-        player.boostSpeed += 10;
-
-        game.shield =
-            clamp(
-                game.shield + 20,
-                0,
-                100
-            );
-
-        showNotification(
-            `LEVEL UP // ${game.level}`
-        );
+        portal.pulse +=
+            dt * 3;
     }
 }
 
 
 // ================================================
-// PORTAL
+// COMPLETE MISSION
 // ================================================
 
-function updatePortal(dt) {
+function completeMission() {
 
-    const portal =
-        world.portals[0];
+    if (
+        game.missionComplete
+    ) {
 
-    if (!portal) {
         return;
     }
 
-    portal.pulse += dt * 3;
+
+    game.missionComplete =
+        true;
+
+    game.score +=
+        1000;
+
+    game.xp +=
+        500;
+
+
+    game.running =
+        false;
+
+
+    explosion(
+        player.x,
+        player.y,
+        80
+    );
+
+
+    setTimeout(
+        () => {
+
+            gameScreen.classList.remove(
+                "active"
+            );
+
+            victoryScreen.classList.add(
+                "active"
+            );
+
+            updateFinalScore();
+
+        },
+        800
+    );
+}
+
+
+// ================================================
+// GAME OVER
+// ================================================
+
+function gameOver() {
 
     if (
-        game.missionComplete &&
-        distance(
-            player,
-            portal
-        ) <
-        player.radius +
-        portal.radius
+        !game.running
     ) {
 
-        victory();
+        return;
     }
+
+
+    game.running =
+        false;
+
+
+    game.paused =
+        false;
+
+
+    pauseOverlay.classList.remove(
+        "active"
+    );
+
+
+    explosion(
+        player.x,
+        player.y,
+        60
+    );
+
+
+    setTimeout(
+        () => {
+
+            gameScreen.classList.remove(
+                "active"
+            );
+
+            gameOverScreen.classList.add(
+                "active"
+            );
+
+
+            updateFinalScore();
+
+        },
+        500
+    );
 }
 
 
 // ================================================
-// GAME UPDATE
+// FINAL SCORE
 // ================================================
 
-function update(dt) {
+function updateFinalScore() {
 
-    updatePlayer(dt);
+    const elements =
+        document.querySelectorAll(
+            "[data-final-score]"
+        );
 
-    updateCores(dt);
 
-    updateDrones(dt);
+    elements.forEach(
+        element => {
 
-    updateParticles(dt);
-
-    updatePortal(dt);
-
-    updateTimer(dt);
-
-    if (game.shake > 0) {
-        game.shake -=
-            30 * dt;
-
-        if (game.shake < 0) {
-            game.shake = 0;
+            element.textContent =
+                formatScore(
+                    game.score
+                );
         }
-    }
-
-    updateHUD();
+    );
 }
-
 
 // ================================================
 // DRAW BACKGROUND
 // ================================================
 
-function drawBackground(time) {
+function drawBackground() {
 
-    ctx.fillStyle = "#03050c";
+    ctx.fillStyle = "#020711";
 
     ctx.fillRect(
         0,
@@ -1281,95 +2128,222 @@ function drawBackground(time) {
     );
 
 
-    // Stars
+    // Deep space gradient
 
-    for (const star of world.stars) {
+    const gradient =
+        ctx.createRadialGradient(
+            width / 2,
+            height / 2,
+            50,
+            width / 2,
+            height / 2,
+            Math.max(
+                width,
+                height
+            )
+        );
 
-        const alpha =
-            star.alpha +
-            Math.sin(
-                time *
-                    star.speed
-            ) *
-            0.15;
+    gradient.addColorStop(
+        0,
+        "#081a2a"
+    );
+
+    gradient.addColorStop(
+        0.5,
+        "#030c17"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#01040a"
+    );
+
+    ctx.fillStyle =
+        gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    // ============================================
+    // STARS
+    // ============================================
+
+    for (
+        const star
+        of world.stars
+    ) {
+
+        ctx.globalAlpha =
+            clamp(
+                star.alpha,
+                0.05,
+                1
+            );
 
         ctx.fillStyle =
-            `rgba(150,220,255,${alpha})`;
+            "#9eeaff";
 
-        ctx.fillRect(
+        ctx.beginPath();
+
+        ctx.arc(
             star.x,
             star.y,
             star.size,
-            star.size
+            0,
+            Math.PI * 2
         );
+
+        ctx.fill();
     }
 
 
-    // Grid
+    ctx.globalAlpha =
+        1;
 
-    const grid = 55;
+
+    // ============================================
+    // GRID
+    // ============================================
 
     ctx.strokeStyle =
-        "rgba(0,217,255,0.055)";
+        "rgba(0,217,255,0.08)";
 
-    ctx.lineWidth = 1;
+    ctx.lineWidth =
+        1;
 
-    const offset =
-        (time * 8) % grid;
 
     for (
-        let x = -grid + offset;
-        x < width + grid;
-        x += grid
+        let x = 0;
+        x < width;
+        x += world.gridSize
     ) {
 
         ctx.beginPath();
 
-        ctx.moveTo(x, 70);
+        ctx.moveTo(
+            x,
+            60
+        );
 
-        ctx.lineTo(x, height);
+        ctx.lineTo(
+            x,
+            height
+        );
 
         ctx.stroke();
     }
 
+
     for (
-        let y = 70 - grid + offset;
+        let y = 60;
         y < height;
-        y += grid
+        y += world.gridSize
     ) {
 
         ctx.beginPath();
 
-        ctx.moveTo(0, y);
+        ctx.moveTo(
+            0,
+            y
+        );
 
-        ctx.lineTo(width, y);
+        ctx.lineTo(
+            width,
+            y
+        );
 
         ctx.stroke();
     }
 
 
-    // Scan lines
+    // ============================================
+    // SCAN LINES
+    // ============================================
 
-    for (const line of world.scanLines) {
+    for (
+        const line
+        of world.scanLines
+    ) {
 
-        line.y +=
-            line.speed *
-            0.016;
+        const scanGradient =
+            ctx.createLinearGradient(
+                0,
+                line.y - 20,
+                0,
+                line.y + 20
+            );
 
-        if (line.y > height) {
-            line.y = 70;
-        }
+        scanGradient.addColorStop(
+            0,
+            "rgba(0,217,255,0)"
+        );
+
+        scanGradient.addColorStop(
+            0.5,
+            "rgba(0,217,255,0.08)"
+        );
+
+        scanGradient.addColorStop(
+            1,
+            "rgba(0,217,255,0)"
+        );
 
         ctx.fillStyle =
-            "rgba(0,217,255,0.025)";
+            scanGradient;
 
         ctx.fillRect(
             0,
-            line.y,
+            line.y - 20,
             width,
-            1
+            40
         );
     }
+
+
+    // ============================================
+    // VIGNETTE
+    // ============================================
+
+    const vignette =
+        ctx.createRadialGradient(
+            width / 2,
+            height / 2,
+            Math.min(
+                width,
+                height
+            ) * 0.25,
+            width / 2,
+            height / 2,
+            Math.max(
+                width,
+                height
+            ) * 0.75
+        );
+
+    vignette.addColorStop(
+        0,
+        "rgba(0,0,0,0)"
+    );
+
+    vignette.addColorStop(
+        1,
+        "rgba(0,0,0,0.65)"
+    );
+
+    ctx.fillStyle =
+        vignette;
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
 }
 
 
@@ -1377,19 +2351,34 @@ function drawBackground(time) {
 // DRAW OBSTACLES
 // ================================================
 
-function drawObstacles(time) {
+function drawObstacles() {
 
-    for (const obstacle of world.obstacles) {
+    for (
+        const obstacle
+        of world.obstacles
+    ) {
 
         ctx.save();
 
+
+        // Outer glow
+
+        ctx.shadowBlur =
+            18;
+
+        ctx.shadowColor =
+            "#6f42c1";
+
+
         ctx.fillStyle =
-            "rgba(10,20,38,0.95)";
+            "#07111e";
 
         ctx.strokeStyle =
-            "rgba(0,217,255,0.25)";
+            "#6f42c1";
 
-        ctx.lineWidth = 1;
+        ctx.lineWidth =
+            1.5;
+
 
         ctx.fillRect(
             obstacle.x,
@@ -1397,6 +2386,7 @@ function drawObstacles(time) {
             obstacle.w,
             obstacle.h
         );
+
 
         ctx.strokeRect(
             obstacle.x,
@@ -1406,78 +2396,56 @@ function drawObstacles(time) {
         );
 
 
-        // Animated edge
-
-        const scan =
-            (
-                time * 60 +
-                obstacle.x
-            ) %
-            obstacle.w;
-
-        ctx.fillStyle =
-            "rgba(0,217,255,0.18)";
-
-        ctx.fillRect(
-            obstacle.x + scan,
-            obstacle.y,
-            2,
-            obstacle.h
-        );
+        ctx.shadowBlur =
+            0;
 
 
-        // Corner markers
-
-        const s = 8;
+        // Inner lines
 
         ctx.strokeStyle =
-            "rgba(139,92,246,0.7)";
+            "rgba(0,217,255,0.25)";
+
+        ctx.lineWidth =
+            1;
+
 
         ctx.beginPath();
 
         ctx.moveTo(
-            obstacle.x,
-            obstacle.y + s
+            obstacle.x + 8,
+            obstacle.y + 8
         );
 
         ctx.lineTo(
-            obstacle.x,
-            obstacle.y
-        );
-
-        ctx.lineTo(
-            obstacle.x + s,
-            obstacle.y
+            obstacle.x +
+                obstacle.w -
+                8,
+            obstacle.y +
+                obstacle.h -
+                8
         );
 
         ctx.stroke();
+
 
         ctx.beginPath();
 
         ctx.moveTo(
             obstacle.x +
                 obstacle.w -
-                s,
-            obstacle.y +
-                obstacle.h
+                8,
+            obstacle.y + 8
         );
 
         ctx.lineTo(
-            obstacle.x +
-                obstacle.w,
-            obstacle.y +
-                obstacle.h
-        );
-
-        ctx.lineTo(
-            obstacle.x +
-                obstacle.w,
+            obstacle.x + 8,
             obstacle.y +
                 obstacle.h -
-                s
+                8
         );
 
         ctx.stroke();
+
 
         ctx.restore();
     }
@@ -1488,70 +2456,211 @@ function drawObstacles(time) {
 // DRAW CORES
 // ================================================
 
-function drawCores(time) {
+function drawCores() {
 
-    for (const core of world.cores) {
+    for (
+        const core
+        of world.cores
+    ) {
 
         const pulse =
-            Math.sin(core.pulse) * 3;
+            Math.sin(
+                core.pulse
+            ) * 3;
+
 
         ctx.save();
-
-        ctx.translate(
-            core.x,
-            core.y
-        );
-
-        ctx.rotate(
-            core.pulse * 0.4
-        );
 
 
         // Glow
 
-        ctx.shadowBlur = 25;
+        ctx.shadowBlur =
+            30;
 
         ctx.shadowColor =
-            "#00d9ff";
+            "#35ff9c";
+
+
+        // Outer ring
+
+        ctx.strokeStyle =
+            "rgba(53,255,156,0.35)";
+
+        ctx.lineWidth =
+            2;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            core.x,
+            core.y,
+            18 + pulse,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.stroke();
+
+
+        // Core diamond
 
         ctx.fillStyle =
-            "#00d9ff";
+            "#35ff9c";
+
+        ctx.strokeStyle =
+            "#ffffff";
+
+        ctx.lineWidth =
+            1;
+
 
         ctx.beginPath();
 
         ctx.moveTo(
-            0,
-            -12 - pulse
+            core.x,
+            core.y - 11
         );
 
         ctx.lineTo(
-            9,
-            0
+            core.x + 8,
+            core.y
         );
 
         ctx.lineTo(
-            0,
-            12 + pulse
+            core.x,
+            core.y + 11
         );
 
         ctx.lineTo(
-            -9,
-            0
+            core.x - 8,
+            core.y
         );
 
         ctx.closePath();
 
         ctx.fill();
 
+        ctx.stroke();
 
-        ctx.shadowBlur = 0;
 
-        ctx.strokeStyle =
+        // Core center
+
+        ctx.fillStyle =
             "#ffffff";
 
-        ctx.lineWidth = 1;
+        ctx.beginPath();
+
+        ctx.arc(
+            core.x,
+            core.y,
+            2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+
+        ctx.restore();
+    }
+}
+
+
+// ================================================
+// DRAW PORTALS
+// ================================================
+
+function drawPortals() {
+
+    for (
+        const portal
+        of world.portals
+    ) {
+
+        const pulse =
+            Math.sin(
+                portal.pulse
+            );
+
+
+        ctx.save();
+
+
+        ctx.translate(
+            portal.x,
+            portal.y
+        );
+
+
+        ctx.rotate(
+            portal.pulse * 0.3
+        );
+
+
+        ctx.shadowBlur =
+            35;
+
+        ctx.shadowColor =
+            "#6f42c1";
+
+
+        ctx.strokeStyle =
+            "rgba(111,66,193,0.8)";
+
+        ctx.lineWidth =
+            3;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            0,
+            0,
+            portal.radius +
+                pulse * 4,
+            0,
+            Math.PI * 2
+        );
 
         ctx.stroke();
+
+
+        ctx.strokeStyle =
+            "rgba(0,217,255,0.65)";
+
+        ctx.lineWidth =
+            1;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            0,
+            0,
+            portal.radius - 9,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.stroke();
+
+
+        ctx.fillStyle =
+            "rgba(0,217,255,0.08)";
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            0,
+            0,
+            portal.radius - 12,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
 
 
         ctx.restore();
@@ -1563,61 +2672,105 @@ function drawCores(time) {
 // DRAW DRONES
 // ================================================
 
-function drawDrones(time) {
+function drawDrones() {
 
-    for (const drone of world.drones) {
+    for (
+        const drone
+        of world.drones
+    ) {
 
         const pulse =
             Math.sin(
                 drone.pulse
             ) * 2;
 
+
         ctx.save();
+
 
         ctx.translate(
             drone.x,
             drone.y
         );
 
+
         ctx.rotate(
             drone.angle
         );
 
 
-        // Glow
+        // Drone glow
 
-        ctx.shadowBlur = 18;
+        ctx.shadowBlur =
+            22;
 
         ctx.shadowColor =
-            "#ff416c";
+            "#ff315c";
+
+
+        // Outer ring
+
+        ctx.strokeStyle =
+            "rgba(255,49,92,0.5)";
+
+        ctx.lineWidth =
+            2;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            0,
+            0,
+            23 + pulse,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.stroke();
 
 
         // Main body
 
         ctx.fillStyle =
-            "#160d18";
+            "#160912";
 
         ctx.strokeStyle =
-            "#ff416c";
+            "#ff315c";
 
-        ctx.lineWidth = 2;
+        ctx.lineWidth =
+            2;
+
 
         ctx.beginPath();
 
-        ctx.moveTo(18, 0);
-
-        ctx.lineTo(
-            -10,
-            -12
-        );
-
-        ctx.lineTo(
-            -17,
+        ctx.moveTo(
+            18,
             0
         );
 
         ctx.lineTo(
-            -10,
+            6,
+            -12
+        );
+
+        ctx.lineTo(
+            -12,
+            -10
+        );
+
+        ctx.lineTo(
+            -18,
+            0
+        );
+
+        ctx.lineTo(
+            -12,
+            10
+        );
+
+        ctx.lineTo(
+            6,
             12
         );
 
@@ -1628,17 +2781,24 @@ function drawDrones(time) {
         ctx.stroke();
 
 
-        // Core
+        // Eye
+
+        ctx.shadowBlur =
+            15;
+
+        ctx.shadowColor =
+            "#ff315c";
 
         ctx.fillStyle =
-            "#ff416c";
+            "#ff315c";
+
 
         ctx.beginPath();
 
         ctx.arc(
+            5,
             0,
-            0,
-            5 + pulse,
+            5,
             0,
             Math.PI * 2
         );
@@ -1646,18 +2806,58 @@ function drawDrones(time) {
         ctx.fill();
 
 
-        // Wings
+        ctx.fillStyle =
+            "#ffffff";
 
-        ctx.strokeStyle =
-            "rgba(255,65,108,0.7)";
 
         ctx.beginPath();
 
-        ctx.moveTo(-5, -8);
-        ctx.lineTo(-16, -18);
+        ctx.arc(
+            6,
+            -1,
+            1.5,
+            0,
+            Math.PI * 2
+        );
 
-        ctx.moveTo(-5, 8);
-        ctx.lineTo(-16, 18);
+        ctx.fill();
+
+
+        // Side wings
+
+        ctx.strokeStyle =
+            "#ff315c";
+
+        ctx.lineWidth =
+            2;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -5,
+            -8
+        );
+
+        ctx.lineTo(
+            -15,
+            -17
+        );
+
+        ctx.stroke();
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            -5,
+            8
+        );
+
+        ctx.lineTo(
+            -15,
+            17
+        );
 
         ctx.stroke();
 
@@ -1668,110 +2868,138 @@ function drawDrones(time) {
 
 
 // ================================================
-// DRAW PORTAL
+// DRAW PARTICLES
 // ================================================
 
-function drawPortal(time) {
+function drawParticles() {
 
-    const portal =
-        world.portals[0];
+    for (
+        const particle
+        of world.particles
+    ) {
 
-    if (!portal) {
-        return;
+        const alpha =
+            clamp(
+                particle.life /
+                particle.maxLife,
+                0,
+                1
+            );
+
+
+        ctx.save();
+
+
+        ctx.globalAlpha =
+            alpha;
+
+
+        if (
+            particle.type ===
+            "explosion"
+        ) {
+
+            ctx.fillStyle =
+                "#35ff9c";
+
+            ctx.shadowColor =
+                "#35ff9c";
+        }
+
+        else if (
+            particle.type ===
+            "drone"
+        ) {
+
+            ctx.fillStyle =
+                "#ff315c";
+
+            ctx.shadowColor =
+                "#ff315c";
+        }
+
+        else {
+
+            ctx.fillStyle =
+                "#00d9ff";
+
+            ctx.shadowColor =
+                "#00d9ff";
+        }
+
+
+        ctx.shadowBlur =
+            12;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            particle.x,
+            particle.y,
+            particle.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+
+        ctx.restore();
     }
-
-    ctx.save();
-
-    ctx.translate(
-        portal.x,
-        portal.y
-    );
-
-    const pulse =
-        Math.sin(
-            portal.pulse
-        ) * 5;
-
-    ctx.shadowBlur = 25;
-
-    ctx.shadowColor =
-        game.missionComplete
-            ? "#35ff9c"
-            : "#6f42c1";
-
-    ctx.strokeStyle =
-        game.missionComplete
-            ? "#35ff9c"
-            : "#6f42c1";
-
-    ctx.lineWidth = 3;
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        0,
-        portal.radius + pulse,
-        0,
-        Math.PI * 2
-    );
-
-    ctx.stroke();
-
-    ctx.rotate(
-        portal.pulse * 0.5
-    );
-
-    ctx.beginPath();
-
-    ctx.arc(
-        0,
-        0,
-        portal.radius - 8,
-        0,
-        Math.PI * 1.5
-    );
-
-    ctx.stroke();
-
-    ctx.restore();
 }
 
 
 // ================================================
-// DRAW PLAYER
+// ADVANCED AI ROBOT
 // ================================================
 
 function drawPlayer() {
 
-    function drawPlayer() {
+    const now =
+        performance.now() /
+        1000;
 
-    const now = performance.now() / 1000;
 
-    // ================================================
+    // ============================================
     // ENERGY TRAIL
-    // ================================================
+    // ============================================
 
-    for (let i = 0; i < player.trail.length; i++) {
+    for (
+        let i = 0;
+        i < player.trail.length;
+        i++
+    ) {
 
-        const point = player.trail[i];
+        const point =
+            player.trail[i];
+
 
         const alpha =
-            Math.max(0, point.life / 0.35);
+            Math.max(
+                0,
+                point.life /
+                0.35
+            );
+
 
         ctx.save();
+
 
         ctx.globalAlpha =
             alpha * 0.45;
 
+
         ctx.fillStyle =
             "#00d9ff";
+
 
         ctx.shadowBlur =
             15;
 
         ctx.shadowColor =
             "#00d9ff";
+
 
         ctx.beginPath();
 
@@ -1785,42 +3013,54 @@ function drawPlayer() {
 
         ctx.fill();
 
+
         ctx.restore();
     }
 
 
-    // ================================================
+    // ============================================
     // ANIMATION
-    // ================================================
+    // ============================================
 
     const pulse =
-        Math.sin(now * 5) * 2;
+        Math.sin(
+            now * 5
+        ) * 2;
+
 
     const hover =
-        Math.sin(now * 4) * 2;
+        Math.sin(
+            now * 4
+        ) * 2;
 
-    const rotation =
+
+    const ringRotation =
         now * 1.8;
 
 
     ctx.save();
+
 
     ctx.translate(
         player.x,
         player.y + hover
     );
 
-    ctx.rotate(player.angle);
+
+    ctx.rotate(
+        player.angle
+    );
 
 
-    // ================================================
+    // ============================================
     // DAMAGE FLASH
-    // ================================================
+    // ============================================
 
     if (
         player.invulnerable > 0 &&
         Math.floor(
-            player.invulnerable * 12
+            player.invulnerable *
+            12
         ) % 2 === 0
     ) {
 
@@ -1829,13 +3069,17 @@ function drawPlayer() {
     }
 
 
-    // ================================================
-    // OUTER ENERGY RING
-    // ================================================
+    // ============================================
+    // ROTATING ENERGY RING
+    // ============================================
 
     ctx.save();
 
-    ctx.rotate(-rotation);
+
+    ctx.rotate(
+        -ringRotation
+    );
+
 
     ctx.strokeStyle =
         "rgba(0,217,255,0.35)";
@@ -1843,11 +3087,13 @@ function drawPlayer() {
     ctx.lineWidth =
         2;
 
+
     ctx.shadowBlur =
         20;
 
     ctx.shadowColor =
         "#00d9ff";
+
 
     ctx.beginPath();
 
@@ -1865,6 +3111,7 @@ function drawPlayer() {
     ctx.strokeStyle =
         "rgba(111,66,193,0.75)";
 
+
     ctx.beginPath();
 
     ctx.arc(
@@ -1877,12 +3124,13 @@ function drawPlayer() {
 
     ctx.stroke();
 
+
     ctx.restore();
 
 
-    // ================================================
-    // DIRECTION INDICATOR
-    // ================================================
+    // ============================================
+    // TARGET / DIRECTION LINE
+    // ============================================
 
     ctx.strokeStyle =
         "rgba(0,217,255,0.45)";
@@ -1890,10 +3138,12 @@ function drawPlayer() {
     ctx.lineWidth =
         1;
 
+
     ctx.setLineDash([
         4,
         6
     ]);
+
 
     ctx.beginPath();
 
@@ -1909,26 +3159,34 @@ function drawPlayer() {
 
     ctx.stroke();
 
+
     ctx.setLineDash([]);
 
 
-    // ================================================
-    // BOOST FLAME
-    // ================================================
+    // ============================================
+    // BOOST ENGINE
+    // ============================================
 
-    if (player.boost) {
+    if (
+        player.boost
+    ) {
 
         const flame =
             25 +
-            Math.sin(now * 20) * 8;
+            Math.sin(
+                now * 20
+            ) * 8;
+
 
         ctx.save();
+
 
         ctx.shadowBlur =
             30;
 
         ctx.shadowColor =
             "#00d9ff";
+
 
         const gradient =
             ctx.createLinearGradient(
@@ -1938,23 +3196,28 @@ function drawPlayer() {
                 0
             );
 
+
         gradient.addColorStop(
             0,
             "#ffffff"
         );
+
 
         gradient.addColorStop(
             0.35,
             "#00d9ff"
         );
 
+
         gradient.addColorStop(
             1,
             "rgba(0,217,255,0)"
         );
 
+
         ctx.fillStyle =
             gradient;
+
 
         ctx.beginPath();
 
@@ -1977,19 +3240,21 @@ function drawPlayer() {
 
         ctx.fill();
 
+
         ctx.restore();
     }
 
 
-    // ================================================
+    // ============================================
     // ROBOT BODY
-    // ================================================
+    // ============================================
 
     ctx.shadowBlur =
         28;
 
     ctx.shadowColor =
         "#00d9ff";
+
 
     ctx.fillStyle =
         "#071522";
@@ -1999,6 +3264,7 @@ function drawPlayer() {
 
     ctx.lineWidth =
         2;
+
 
     ctx.beginPath();
 
@@ -2054,12 +3320,13 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // ================================================
+    // ============================================
     // INNER ARMOR
-    // ================================================
+    // ============================================
 
     ctx.shadowBlur =
         0;
+
 
     ctx.fillStyle =
         "rgba(0,217,255,0.08)";
@@ -2069,6 +3336,7 @@ function drawPlayer() {
 
     ctx.lineWidth =
         1;
+
 
     ctx.beginPath();
 
@@ -2114,15 +3382,16 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // ================================================
+    // ============================================
     // LEFT ARM
-    // ================================================
+    // ============================================
 
     ctx.strokeStyle =
         "#00d9ff";
 
     ctx.lineWidth =
         3;
+
 
     ctx.beginPath();
 
@@ -2144,9 +3413,9 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // ================================================
+    // ============================================
     // RIGHT ARM
-    // ================================================
+    // ============================================
 
     ctx.beginPath();
 
@@ -2168,15 +3437,16 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // ================================================
+    // ============================================
     // ROBOT HEAD
-    // ================================================
+    // ============================================
 
     ctx.shadowBlur =
         18;
 
     ctx.shadowColor =
         "#00d9ff";
+
 
     ctx.fillStyle =
         "#101f31";
@@ -2187,12 +3457,14 @@ function drawPlayer() {
     ctx.lineWidth =
         1.5;
 
+
     ctx.fillRect(
         -2,
         -11,
         15,
         22
     );
+
 
     ctx.strokeRect(
         -2,
@@ -2202,15 +3474,16 @@ function drawPlayer() {
     );
 
 
-    // ================================================
+    // ============================================
     // ANTENNA
-    // ================================================
+    // ============================================
 
     ctx.strokeStyle =
         "#00d9ff";
 
     ctx.lineWidth =
         1.5;
+
 
     ctx.beginPath();
 
@@ -2236,12 +3509,14 @@ function drawPlayer() {
     ctx.shadowColor =
         "#35ff9c";
 
+
     ctx.beginPath();
 
     ctx.arc(
         5,
         -21,
-        2.5 + pulse * 0.3,
+        2.5 +
+            pulse * 0.3,
         0,
         Math.PI * 2
     );
@@ -2249,9 +3524,9 @@ function drawPlayer() {
     ctx.fill();
 
 
-    // ================================================
+    // ============================================
     // AI VISOR
-    // ================================================
+    // ============================================
 
     ctx.shadowBlur =
         20;
@@ -2259,8 +3534,10 @@ function drawPlayer() {
     ctx.shadowColor =
         "#00d9ff";
 
+
     ctx.fillStyle =
         "#00d9ff";
+
 
     ctx.fillRect(
         2,
@@ -2270,15 +3547,17 @@ function drawPlayer() {
     );
 
 
-    // ================================================
+    // ============================================
     // VISOR HIGHLIGHT
-    // ================================================
+    // ============================================
 
     ctx.fillStyle =
         "#ffffff";
 
+
     ctx.globalAlpha *=
         0.8;
+
 
     ctx.fillRect(
         3,
@@ -2288,12 +3567,13 @@ function drawPlayer() {
     );
 
 
-    // ================================================
+    // ============================================
     // NEURAL CORE
-    // ================================================
+    // ============================================
 
     ctx.globalAlpha =
         1;
+
 
     ctx.shadowBlur =
         30;
@@ -2301,15 +3581,18 @@ function drawPlayer() {
     ctx.shadowColor =
         "#35ff9c";
 
+
     ctx.fillStyle =
         "#35ff9c";
+
 
     ctx.beginPath();
 
     ctx.arc(
         -5,
         0,
-        5 + pulse * 0.4,
+        5 +
+            pulse * 0.4,
         0,
         Math.PI * 2
     );
@@ -2317,12 +3600,11 @@ function drawPlayer() {
     ctx.fill();
 
 
-    // ================================================
-    // CORE CENTER
-    // ================================================
+    // Core center
 
     ctx.fillStyle =
         "#ffffff";
+
 
     ctx.beginPath();
 
@@ -2337,9 +3619,9 @@ function drawPlayer() {
     ctx.fill();
 
 
-    // ================================================
+    // ============================================
     // STATUS LIGHTS
-    // ================================================
+    // ============================================
 
     ctx.shadowBlur =
         12;
@@ -2347,8 +3629,10 @@ function drawPlayer() {
     ctx.shadowColor =
         "#00d9ff";
 
+
     ctx.fillStyle =
         "#00d9ff";
+
 
     ctx.fillRect(
         -13,
@@ -2357,6 +3641,7 @@ function drawPlayer() {
         2
     );
 
+
     ctx.fillRect(
         -13,
         2,
@@ -2365,9 +3650,9 @@ function drawPlayer() {
     );
 
 
-    // ================================================
+    // ============================================
     // SHIELD ARC
-    // ================================================
+    // ============================================
 
     ctx.shadowBlur =
         12;
@@ -2375,11 +3660,13 @@ function drawPlayer() {
     ctx.shadowColor =
         "#00d9ff";
 
+
     ctx.strokeStyle =
         "rgba(0,217,255,0.5)";
 
     ctx.lineWidth =
         1;
+
 
     ctx.beginPath();
 
@@ -2394,11 +3681,13 @@ function drawPlayer() {
     ctx.stroke();
 
 
-    // ================================================
+    // ============================================
     // BOOST PARTICLES
-    // ================================================
+    // ============================================
 
-    if (player.boost) {
+    if (
+        player.boost
+    ) {
 
         for (
             let i = 0;
@@ -2408,10 +3697,16 @@ function drawPlayer() {
 
             const px =
                 -20 -
-                Math.random() * 18;
+                Math.random() *
+                18;
+
 
             const py =
-                (Math.random() - 0.5) * 12;
+                (
+                    Math.random() -
+                    0.5
+                ) * 12;
+
 
             ctx.fillStyle =
                 "#00d9ff";
@@ -2419,13 +3714,15 @@ function drawPlayer() {
             ctx.shadowBlur =
                 15;
 
+
             ctx.beginPath();
 
             ctx.arc(
                 px,
                 py,
                 1.5 +
-                Math.random() * 2,
+                    Math.random() *
+                    2,
                 0,
                 Math.PI * 2
             );
@@ -2438,78 +3735,428 @@ function drawPlayer() {
     ctx.restore();
 }
 
+
 // ================================================
-// DRAW PARTICLES
+// DRAW HUD EFFECT
 // ================================================
 
-function drawParticles() {
+function drawHUDOverlay() {
 
-    for (const particle of world.particles) {
+    // Top scan line
 
-        const alpha =
-            particle.life /
-            particle.maxLife;
+    ctx.save();
 
-        let color;
+
+    ctx.strokeStyle =
+        "rgba(0,217,255,0.15)";
+
+    ctx.lineWidth =
+        1;
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        60
+    );
+
+    ctx.lineTo(
+        width,
+        60
+    );
+
+    ctx.stroke();
+
+
+    // Corner brackets
+
+    const size =
+        25;
+
+
+    ctx.strokeStyle =
+        "rgba(0,217,255,0.35)";
+
+    ctx.lineWidth =
+        2;
+
+
+    // Top left
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        10,
+        80
+    );
+
+    ctx.lineTo(
+        10 + size,
+        80
+    );
+
+    ctx.moveTo(
+        10,
+        80
+    );
+
+    ctx.lineTo(
+        10,
+        80 + size
+    );
+
+    ctx.stroke();
+
+
+    // Top right
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        width - 10,
+        80
+    );
+
+    ctx.lineTo(
+        width - 10 - size,
+        80
+    );
+
+    ctx.moveTo(
+        width - 10,
+        80
+    );
+
+    ctx.lineTo(
+        width - 10,
+        80 + size
+    );
+
+    ctx.stroke();
+
+
+    ctx.restore();
+}
+
+// ================================================
+// UPDATE HUD
+// ================================================
+
+function updateHUD() {
+
+    // Timer
+
+    const minutes =
+        Math.floor(
+            Math.max(
+                0,
+                game.time
+            ) / 60
+        );
+
+    const seconds =
+        Math.floor(
+            Math.max(
+                0,
+                game.time
+            ) % 60
+        );
+
+
+    if (timerElement) {
+
+        timerElement.textContent =
+            `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    }
+
+
+    // Energy
+
+    if (energyText) {
+
+        energyText.textContent =
+            `${Math.round(game.energy)}%`;
+    }
+
+
+    if (energyBar) {
+
+        energyBar.style.width =
+            `${game.energy}%`;
+    }
+
+
+    // Shield
+
+    if (shieldText) {
+
+        shieldText.textContent =
+            `${Math.round(game.shield)}%`;
+    }
+
+
+    if (shieldBar) {
+
+        shieldBar.style.width =
+            `${game.shield}%`;
+    }
+
+
+    // XP
+
+    const requiredXP =
+        game.level * 250;
+
+    const xpPercent =
+        clamp(
+            (game.xp / requiredXP) * 100,
+            0,
+            100
+        );
+
+
+    if (xpText) {
+
+        xpText.textContent =
+            `${Math.round(game.xp)} / ${requiredXP}`;
+    }
+
+
+    if (xpBar) {
+
+        xpBar.style.width =
+            `${xpPercent}%`;
+    }
+
+
+    // Objective
+
+    if (objectiveCount) {
+
+        objectiveCount.textContent =
+            game.cores;
+    }
+
+
+    if (objectiveTotal) {
+
+        objectiveTotal.textContent =
+            game.objectiveTotal;
+    }
+
+
+    // Threats
+
+    if (threatCount) {
+
+        threatCount.textContent =
+            world.drones.length;
+    }
+
+
+    // Cores
+
+    if (coreCount) {
+
+        coreCount.textContent =
+            game.cores;
+    }
+
+
+    // Score
+
+    if (scoreElement) {
+
+        scoreElement.textContent =
+            formatScore(game.score);
+    }
+
+
+    // Level
+
+    if (levelElement) {
+
+        levelElement.textContent =
+            game.level;
+    }
+
+
+    // Objective text
+
+    if (objectiveElement) {
 
         if (
-            particle.type ===
-            "explosion"
+            game.missionComplete
         ) {
-            color = "255,65,108";
-        }
 
-        else if (
-            particle.type ===
-            "boost"
-        ) {
-            color = "0,217,255";
+            objectiveElement.textContent =
+                "MISSION COMPLETE";
         }
 
         else {
-            color = "53,255,156";
+
+            objectiveElement.textContent =
+                "COLLECT ALL ENERGY CORES";
         }
-
-        ctx.fillStyle =
-            `rgba(${color},${alpha})`;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            particle.x,
-            particle.y,
-            particle.size *
-                alpha,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fill();
     }
 }
 
 
 // ================================================
-// DRAW RADAR BLIPS
+// UPDATE GAME TIMER
 // ================================================
 
-function drawRadarBlips() {
+function updateTimer(dt) {
 
-    // DOM radar is visual only.
-    // This function intentionally keeps
-    // the actual game rendering separate.
+    game.timerAccumulator +=
+        dt;
+
+
+    if (
+        game.timerAccumulator >=
+        1
+    ) {
+
+        const elapsed =
+            Math.floor(
+                game.timerAccumulator
+            );
+
+
+        game.timerAccumulator -=
+            elapsed;
+
+
+        game.time -=
+            elapsed;
+
+
+        if (
+            game.time <= 0
+        ) {
+
+            game.time = 0;
+
+            gameOver();
+        }
+    }
 }
 
 
 // ================================================
-// RENDER
+// UPDATE GAME
 // ================================================
 
-function render(time) {
+function updateGame(dt) {
+
+    if (
+        !game.running ||
+        game.paused
+    ) {
+
+        return;
+    }
+
+
+    // Limit extremely large
+    // delta values.
+
+    dt =
+        Math.min(
+            dt,
+            0.05
+        );
+
+
+    updateTimer(dt);
+
+    updatePlayer(dt);
+
+    updateDrones(dt);
+
+    updateCores(dt);
+
+    updateParticles(dt);
+
+    updateStars(dt);
+
+    updateScanLines(dt);
+
+    updatePortals(dt);
+
+
+    // Slowly regenerate shield
+
+    if (
+        game.shield > 0 &&
+        game.shield < 100
+    ) {
+
+        game.shield +=
+            2 * dt;
+
+        game.shield =
+            clamp(
+                game.shield,
+                0,
+                100
+            );
+    }
+
+
+    // Score for surviving
+
+    game.score +=
+        dt * 2;
+
+
+    // Camera shake
+
+    if (
+        game.shake > 0
+    ) {
+
+        game.shake -=
+            dt * 20;
+
+        if (
+            game.shake < 0
+        ) {
+
+            game.shake = 0;
+        }
+    }
+
+
+    updateHUD();
+}
+
+
+// ================================================
+// DRAW GAME
+// ================================================
+
+function drawGame() {
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    // ============================================
+    // CAMERA SHAKE
+    // ============================================
 
     ctx.save();
 
-    if (game.shake > 0) {
+
+    if (
+        game.shake > 0
+    ) {
 
         ctx.translate(
             random(
@@ -2523,50 +4170,79 @@ function render(time) {
         );
     }
 
-    drawBackground(time);
 
-    drawObstacles(time);
+    // ============================================
+    // WORLD
+    // ============================================
 
-    drawPortal(time);
+    drawBackground();
 
-    drawCores(time);
+    drawObstacles();
 
-    drawDrones(time);
+    drawPortals();
+
+    drawCores();
+
+    drawDrones();
 
     drawParticles();
 
     drawPlayer();
 
+
     ctx.restore();
+
+
+    // ============================================
+    // HUD EFFECT
+    // ============================================
+
+    drawHUDOverlay();
 }
 
 
 // ================================================
-// GAME LOOP
+// MAIN GAME LOOP
 // ================================================
 
 function gameLoop(timestamp) {
 
-    if (!game.running) {
+    /*
+    IMPORTANT:
+
+    Do not create another animation loop
+    inside startGame().
+
+    This function controls the entire game.
+    */
+
+
+    if (
+        !game.running
+    ) {
+
         return;
     }
 
-    if (game.paused) {
-        return;
-    }
 
-    if (!game.lastTime) {
+    if (
+        !game.lastTime
+    ) {
+
         game.lastTime =
             timestamp;
     }
+
 
     let dt =
         (timestamp -
             game.lastTime) /
         1000;
 
+
     game.lastTime =
         timestamp;
+
 
     dt =
         Math.min(
@@ -2574,13 +4250,20 @@ function gameLoop(timestamp) {
             0.05
         );
 
-    update(dt);
 
-    render(
-        timestamp / 1000
-    );
+    if (
+        !game.paused
+    ) {
 
-    if (game.running) {
+        updateGame(dt);
+
+        drawGame();
+    }
+
+
+    if (
+        game.running
+    ) {
 
         requestAnimationFrame(
             gameLoop
@@ -2590,189 +4273,283 @@ function gameLoop(timestamp) {
 
 
 // ================================================
-// HUD
+// WINDOW VISIBILITY
 // ================================================
 
-function updateHUD() {
+document.addEventListener(
+    "visibilitychange",
+    () => {
 
-    timerElement.textContent =
-        Math.ceil(game.time);
+        if (
+            document.hidden
+        ) {
 
-    energyText.textContent =
-        `${Math.round(game.energy)}%`;
+            if (
+                game.running &&
+                !game.paused
+            ) {
 
-    shieldText.textContent =
-        `${Math.round(game.shield)}%`;
+                game.paused =
+                    true;
 
-    const xpRequired =
-        game.level * 500;
+                if (
+                    pauseOverlay
+                ) {
 
-    xpText.textContent =
-        `${Math.round(game.xp)} / ${xpRequired}`;
-
-    energyBar.style.width =
-        `${game.energy}%`;
-
-    shieldBar.style.width =
-        `${game.shield}%`;
-
-    xpBar.style.width =
-        `${Math.min(
-            100,
-            (game.xp /
-                xpRequired) *
-                100
-        )}%`;
-
-    objectiveCount.textContent =
-        game.collected;
-
-    objectiveTotal.textContent =
-        game.objectiveTotal;
-
-    threatCount.textContent =
-        world.drones.length;
-
-    coreCount.textContent =
-        game.cores;
-
-    scoreElement.textContent =
-        formatScore(
-            game.score
-        );
-
-    levelElement.textContent =
-        String(
-            game.level
-        ).padStart(2, "0");
-
-
-    if (
-        game.missionComplete
-    ) {
-
-        objectiveElement.textContent =
-            "REACH THE NEURAL GATE";
-
-    } else {
-
-        objectiveElement.textContent =
-            "COLLECT 5 ENERGY CORES";
+                    pauseOverlay.classList.add(
+                        "active"
+                    );
+                }
+            }
+        }
     }
+);
+
+
+// ================================================
+// MOUSE / TOUCH SUPPORT
+// ================================================
+
+let pointerActive =
+    false;
+
+let pointerStartX =
+    0;
+
+let pointerStartY =
+    0;
+
+
+canvas.addEventListener(
+    "pointerdown",
+    (event) => {
+
+        pointerActive =
+            true;
+
+        pointerStartX =
+            event.clientX;
+
+        pointerStartY =
+            event.clientY;
+    }
+);
+
+
+canvas.addEventListener(
+    "pointermove",
+    (event) => {
+
+        if (
+            !pointerActive ||
+            !game.running ||
+            game.paused
+        ) {
+
+            return;
+        }
+
+
+        const dx =
+            event.clientX -
+            pointerStartX;
+
+        const dy =
+            event.clientY -
+            pointerStartY;
+
+
+        // Clear movement keys
+
+        keys["w"] = false;
+        keys["a"] = false;
+        keys["s"] = false;
+        keys["d"] = false;
+
+
+        if (
+            Math.abs(dx) >
+            15
+        ) {
+
+            if (
+                dx > 0
+            ) {
+
+                keys["d"] = true;
+            }
+
+            else {
+
+                keys["a"] = true;
+            }
+        }
+
+
+        if (
+            Math.abs(dy) >
+            15
+        ) {
+
+            if (
+                dy > 0
+            ) {
+
+                keys["s"] = true;
+            }
+
+            else {
+
+                keys["w"] = true;
+            }
+        }
+    }
+);
+
+
+function stopPointerMovement() {
+
+    pointerActive =
+        false;
+
+    keys["w"] = false;
+    keys["a"] = false;
+    keys["s"] = false;
+    keys["d"] = false;
+}
+
+
+canvas.addEventListener(
+    "pointerup",
+    stopPointerMovement
+);
+
+canvas.addEventListener(
+    "pointercancel",
+    stopPointerMovement
+);
+
+canvas.addEventListener(
+    "pointerleave",
+    stopPointerMovement
+);
+
+
+// ================================================
+// ESCAPE = PAUSE
+// ================================================
+
+window.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            togglePause();
+        }
+    }
+);
+
+
+// ================================================
+// INITIAL UI STATE
+// ================================================
+
+function initializeUI() {
+
+    if (startScreen) {
+
+        startScreen.classList.add(
+            "active"
+        );
+    }
+
+
+    if (gameScreen) {
+
+        gameScreen.classList.remove(
+            "active"
+        );
+    }
+
+
+    if (gameOverScreen) {
+
+        gameOverScreen.classList.remove(
+            "active"
+        );
+    }
+
+
+    if (victoryScreen) {
+
+        victoryScreen.classList.remove(
+            "active"
+        );
+    }
+
+
+    if (pauseOverlay) {
+
+        pauseOverlay.classList.remove(
+            "active"
+        );
+    }
+
+
+    updateHUD();
 }
 
 
 // ================================================
-// GAME OVER
+// INITIALIZE
 // ================================================
 
-function endGame() {
+initializeUI();
 
-    if (!game.running) {
-        return;
+
+// ================================================
+// SAFETY: PREVENT DOUBLE START
+// ================================================
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        game.running =
+            false;
     }
-
-    game.running = false;
-
-    document.getElementById(
-        "finalScore"
-    ).textContent =
-        formatScore(
-            game.score
-        );
-
-    document.getElementById(
-        "finalLevel"
-    ).textContent =
-        game.level;
-
-    document.getElementById(
-        "finalCores"
-    ).textContent =
-        game.cores;
-
-    document.getElementById(
-        "finalXP"
-    ).textContent =
-        Math.floor(game.xp);
-
-    gameScreen.classList.remove(
-        "active"
-    );
-
-    gameOverScreen.classList.add(
-        "active"
-    );
-}
-
-
-// ================================================
-// VICTORY
-// ================================================
-
-function victory() {
-
-    if (!game.running) {
-        return;
-    }
-
-    game.running = false;
-
-    game.score +=
-        Math.floor(
-            game.time * 10
-        );
-
-    document.getElementById(
-        "victoryScore"
-    ).textContent =
-        formatScore(
-            game.score
-        );
-
-    gameScreen.classList.remove(
-        "active"
-    );
-
-    victoryScreen.classList.add(
-        "active"
-    );
-}
-
-
-// ================================================
-// BUTTON EVENTS
-// ================================================
-
-startButton.addEventListener(
-    "click",
-    startGame
-);
-
-restartButton.addEventListener(
-    "click",
-    startGame
-);
-
-victoryRestart.addEventListener(
-    "click",
-    startGame
-);
-
-resumeButton.addEventListener(
-    "click",
-    togglePause
 );
 
 
-// ================================================
-// INITIAL STATE
-// ================================================
+/*
+=========================================================
+ CONTROLS
 
-startScreen.classList.add(
-    "active"
-);
+ W / A / S / D
+ Arrow Keys
+ SHIFT = BOOST
+ P = PAUSE
+ ESC = PAUSE
 
-console.log(
-    "NEURAL//CORE SYSTEM READY"
-);
+ OBJECTIVE
+
+ Collect all energy cores
+ while avoiding enemy drones.
+
+ VICTORY
+
+ Collect every core.
+
+ DEFEAT
+
+ Shield reaches zero
+ OR mission timer reaches zero.
+=========================================================
+*/
+
+
+
+
