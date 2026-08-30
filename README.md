@@ -148,6 +148,26 @@ Data analytics project focused on sales performance, customer behavior, regional
 
 ---
 
+## 🤖 AI ROBOT GAME — NEURAL//CORE
+
+<p align="center">
+  <a href="https://subramani2006.github.io/subramani2006/assets/ai-robot-game/">
+    <img src="https://img.shields.io/badge/🚀%20PLAY%20NEURAL%2F%2FCORE-00E5FF?style=for-the-badge&logo=gamepad&logoColor=white" alt="Play AI Robot Game">
+  </a>
+</p>
+
+<p align="center">
+  <b>⚡ Enter the AI battlefield. Collect energy cores. Survive the threats. ⚡</b>
+</p>
+
+<p align="center">
+  <code>W A S D</code> Move &nbsp;•&nbsp;
+  <code>SHIFT</code> Boost &nbsp;•&nbsp;
+  <code>P</code> Pause
+</p>
+
+---
+
 ## 🛠️ Tech Stack
 
 ### Languages
