@@ -2093,23 +2093,87 @@ function gameOver() {
 // FINAL SCORE
 // ================================================
 
+// ================================================
+// FINAL SCORE
+// ================================================
+
 function updateFinalScore() {
 
-    const elements =
-        document.querySelectorAll(
-            "[data-final-score]"
+    const finalScore =
+        formatScore(game.score);
+
+
+    // Victory screen
+
+    const victoryScore =
+        document.getElementById(
+            "victoryScore"
         );
 
+    if (victoryScore) {
 
-    elements.forEach(
-        element => {
+        victoryScore.textContent =
+            finalScore;
+    }
 
-            element.textContent =
-                formatScore(
-                    game.score
-                );
-        }
-    );
+
+    // Game over screen
+
+    const finalScoreElement =
+        document.getElementById(
+            "finalScore"
+        );
+
+    if (finalScoreElement) {
+
+        finalScoreElement.textContent =
+            finalScore;
+    }
+
+
+    // Final level
+
+    const finalLevel =
+        document.getElementById(
+            "finalLevel"
+        );
+
+    if (finalLevel) {
+
+        finalLevel.textContent =
+            String(game.level).padStart(
+                2,
+                "0"
+            );
+    }
+
+
+    // Final cores
+
+    const finalCores =
+        document.getElementById(
+            "finalCores"
+        );
+
+    if (finalCores) {
+
+        finalCores.textContent =
+            game.cores;
+    }
+
+
+    // Final XP
+
+    const finalXP =
+        document.getElementById(
+            "finalXP"
+        );
+
+    if (finalXP) {
+
+        finalXP.textContent =
+            Math.floor(game.xp);
+    }
 }
 
 // ================================================
