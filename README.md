@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&height=220&section=header&text=Subramani%20U&fontSize=60&fontAlignY=35&animation=twinkling&desc=AI%20%26%20Data%20Science%20Student&descAlignY=60&descSize=22" width="100%"/>
+<img src="./assets/ai-banner.svg" width="100%" alt="Animated AI Banner"/>
 
-<br>
+<br><br>
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=25&duration=2200&pause=700&color=6F42C1&center=true&vCenter=true&width=850&lines=AI+%26+Data+Science+Student;Machine+Learning+Enthusiast;Deep+Learning+Explorer;Computer+Vision+Developer;Data+Analytics+Enthusiast;Exploring+Generative+AI+%26+LLMs)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=2200&pause=700&center=true&vCenter=true&width=850&lines=AI+%26+Data+Science+Student;Machine+Learning+Enthusiast;Deep+Learning+Explorer;Computer+Vision+Developer;Data+Analytics+Enthusiast;Exploring+Generative+AI+%26+LLMs)](https://git.io/typing-svg)
 
 <br>
 
@@ -14,8 +14,15 @@
 
 <br>
 
-![Profile Views](https://komarev.com/ghpvc/?username=subramani2006&style=for-the-badge&color=6F42C1)
-![Followers](https://img.shields.io/github/followers/subramani2006?style=for-the-badge&logo=github&label=Followers)
+![Profile Views](https://komarev.com/ghpvc/?username=subramani2006&style=for-the-badge&color=6f42c1)
+
+</div>
+
+---
+
+<div align="center">
+
+<img src="./assets/coding.svg" width="100%" alt="Animated Coding"/>
 
 </div>
 
@@ -34,30 +41,145 @@ B.Tech Artificial Intelligence and Data Science student passionate about buildin
 
 ---
 
+<div align="center">
+
+<img src="./assets/projects.svg" width="100%" alt="Animated Projects"/>
+
+</div>
+
+---
+
+## 🚀 Featured Projects
+
+### 🌱 Plant Disease Classification
+
+<details>
+<summary><b>View Project Details</b></summary>
+
+Transfer learning framework for automated plant disease classification using deep learning and image processing.
+
+**Tech Stack:** `Python` `TensorFlow` `Keras` `OpenCV`
+
+**Key Work:**
+
+- Applied transfer learning using pre-trained CNN models
+- Implemented image preprocessing and augmentation
+- Developed disease prediction functionality
+- Worked on improving model performance
+
+</details>
+
+---
+
+### 🚗 Driver Drowsiness Detection
+
+<details>
+<summary><b>View Project Details</b></summary>
+
+Vision-based driver drowsiness detection and safety monitoring system.
+
+**Tech Stack:** `Python` `OpenCV` `MediaPipe` `TensorFlow`
+
+**Key Work:**
+
+- Implemented facial landmark detection
+- Monitored eye closure and blink patterns
+- Detected yawning using computer vision
+- Developed real-time detection functionality
+- Implemented an alert mechanism
+
+</details>
+
+---
+
+### 🎓 Student Performance Analysis
+
+<details>
+<summary><b>View Project Details</b></summary>
+
+Data analytics project for analyzing student performance and identifying students who may require additional academic support.
+
+**Tech Stack:** `Python` `Pandas` `NumPy` `Matplotlib`
+
+**Key Work:**
+
+- Data cleaning and preprocessing
+- Exploratory data analysis
+- Student performance analysis
+- Data visualization
+- Identification of at-risk students
+- Actionable insights
+
+🔗 [View Repository](https://github.com/subramani2006/student_performance_in_exams)
+
+</details>
+
+---
+
+### 🛒 E-Commerce Sales Analysis
+
+<details>
+<summary><b>View Project Details</b></summary>
+
+Data analytics project focused on sales performance, customer behavior, regional trends and business insights.
+
+**Tech Stack:** `Python` `Pandas` `NumPy` `Matplotlib`
+
+**Key Work:**
+
+- Data cleaning and preprocessing
+- Sales and revenue analysis
+- Monthly trend analysis
+- Regional analysis
+- Customer review analysis
+- Business insights
+
+🔗 [View Repository](https://github.com/subramani2006/Ecommerce_Sales_Analysis)
+
+</details>
+
+---
+
+<div align="center">
+
+<img src="./assets/learning.svg" width="100%" alt="Animated Learning"/>
+
+</div>
+
+---
+
 ## 🛠️ Tech Stack
 
-### 💻 Languages
+### Languages
 
 <p align="center">
-<img src="https://skillicons.dev/icons?i=python,cpp,mysql&perline=6" />
+
+<img src="https://skillicons.dev/icons?i=python,cpp,mysql" />
+
 </p>
 
-### 🤖 AI / Machine Learning
+### AI / ML
 
 <p align="center">
-<img src="https://skillicons.dev/icons?i=tensorflow,sklearn&perline=6" />
+
+<img src="https://skillicons.dev/icons?i=tensorflow,sklearn" />
+
 </p>
 
-### 📊 Data & Computer Vision
+### Data & Computer Vision
 
 <p align="center">
-<img src="https://skillicons.dev/icons?i=numpy,pandas,opencv&perline=6" />
+
+<img src="https://skillicons.dev/icons?i=numpy,pandas,opencv" />
+
 </p>
 
-### 🔧 Developer Tools
+### Developer Tools
 
 <p align="center">
-<img src="https://skillicons.dev/icons?i=git,github,vscode,jupyter&perline=6" />
+
+<img src="https://skillicons.dev/icons?i=git,github,vscode,jupyter" />
+
 </p>
 
 ---
@@ -71,117 +193,6 @@ B.Tech Artificial Intelligence and Data Science student passionate about buildin
 | 👁️ Computer Vision | Intermediate | OpenCV, MediaPipe, Image Processing |
 | 📊 Data Analytics | Intermediate | Pandas, NumPy, Matplotlib, EDA |
 | ✨ Generative AI | Learning | LLMs, RAG, Transformers |
-
----
-
-## 🚀 Featured Projects
-
-### 🌱 Plant Disease Classification
-
-<details>
-<summary><b>🔍 View Project Details</b></summary>
-
-### Transfer Learning Framework for Automated Plant Disease Classification
-
-Deep learning application for identifying plant diseases from leaf images using transfer learning with pre-trained CNN models.
-
-**Tech Stack**
-
-`Python` `TensorFlow` `Keras` `OpenCV`
-
-**Key Work**
-
-- Applied transfer learning using pre-trained CNN models
-- Implemented image preprocessing and augmentation
-- Developed disease prediction functionality
-- Focused on improving model performance
-
-</details>
-
----
-
-### 🚗 Driver Drowsiness Detection
-
-<details>
-<summary><b>🔍 View Project Details</b></summary>
-
-### Vision-Based Driver Drowsiness Detection & Safety Monitoring System
-
-AI-powered computer vision system designed to detect driver drowsiness in real time by monitoring eye closure, blinking, and yawning.
-
-**Tech Stack**
-
-`Python` `OpenCV` `MediaPipe` `TensorFlow`
-
-**Key Work**
-
-- Implemented facial landmark detection using MediaPipe
-- Monitored eye closure and blink patterns
-- Detected yawning using computer vision techniques
-- Integrated TensorFlow into the detection workflow
-- Implemented a real-time alert mechanism
-
-</details>
-
----
-
-### 🎓 Student Performance Analysis
-
-<details>
-<summary><b>🔍 View Project Details</b></summary>
-
-### Student Performance Analysis
-
-Data analytics project focused on analyzing student performance and identifying students who may require additional academic support.
-
-**Tech Stack**
-
-`Python` `Pandas` `NumPy` `Matplotlib`
-
-**Key Work**
-
-- Cleaned and prepared the dataset
-- Performed exploratory data analysis
-- Analyzed student performance patterns
-- Created data visualizations
-- Identified at-risk students
-- Derived actionable insights
-
-**Repository**
-
-[🔗 View Project](https://github.com/subramani2006/student_performance_in_exams)
-
-</details>
-
----
-
-### 🛒 E-Commerce Sales Analysis
-
-<details>
-<summary><b>🔍 View Project Details</b></summary>
-
-### E-Commerce Sales Analysis
-
-Data analytics project focused on analyzing sales performance, customer behavior, regional trends, and business opportunities.
-
-**Tech Stack**
-
-`Python` `Pandas` `NumPy` `Matplotlib`
-
-**Key Work**
-
-- Cleaned and prepared sales datasets
-- Analyzed revenue and sales performance
-- Identified monthly sales trends
-- Performed regional analysis
-- Analyzed customer reviews
-- Generated actionable business insights
-
-**Repository**
-
-[🔗 View Project](https://github.com/subramani2006/Ecommerce_Sales_Analysis)
-
-</details>
 
 ---
 
@@ -215,7 +226,7 @@ Data analytics project focused on analyzing sales performance, customer behavior
 
 <div align="center">
 
-| 🏅 Recognition | 📌 Details |
+| 🏅 Achievement | 📌 Details |
 |---|---|
 | 🎓 Academic Achievement | **97.50%** in Higher Secondary Education |
 | 🏆 School Achievement | **100%** in 10th Standard |
@@ -237,7 +248,11 @@ Data analytics project focused on analyzing sales performance, customer behavior
 
 <div align="center">
 
+### 🟠 LeetCode
+
 [![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/SubramaniU/)
+
+### 🟢 GeeksforGeeks
 
 [![GeeksforGeeks](https://img.shields.io/badge/GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](http://geeksforgeeks.org/profile/subramanmxp5)
 
