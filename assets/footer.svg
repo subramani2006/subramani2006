@@ -1,1 +1,163 @@
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 220">
+
+  <defs>
+
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" />
+      <stop offset="50%" />
+      <stop offset="100%" />
+    </linearGradient>
+
+    <linearGradient id="accent">
+      <stop offset="0%">
+        <animate
+          attributeName="stop-color"
+          values="#6f42c1;#00d9ff;#6f42c1"
+          dur="4s"
+          repeatCount="indefinite"/>
+      </stop>
+
+      <stop offset="100%">
+        <animate
+          attributeName="stop-color"
+          values="#00d9ff;#6f42c1;#00d9ff"
+          dur="4s"
+          repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+  </defs>
+
+
+  <!-- Background -->
+
+  <rect
+    width="1200"
+    height="220"
+    rx="25"
+    fill="url(#bg)"/>
+
+
+  <!-- Animated particles -->
+
+  <g fill="#00d9ff" filter="url(#glow)">
+
+    <circle cx="100" cy="110" r="4">
+      <animate
+        attributeName="cx"
+        values="100;1100;100"
+        dur="8s"
+        repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="1100" cy="70" r="3">
+      <animate
+        attributeName="cx"
+        values="1100;100;1100"
+        dur="7s"
+        repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="300" cy="180" r="3">
+      <animate
+        attributeName="cy"
+        values="180;40;180"
+        dur="4s"
+        repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="900" cy="40" r="3">
+      <animate
+        attributeName="cy"
+        values="40;180;40"
+        dur="5s"
+        repeatCount="indefinite"/>
+    </circle>
+
+  </g>
+
+
+  <!-- Main animated text -->
+
+  <text
+    x="600"
+    y="90"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="34"
+    font-weight="bold"
+    fill="url(#accent)">
+
+    BUILDING • LEARNING • IMPROVING
+
+    <animate
+      attributeName="opacity"
+      values="0.5;1;0.5"
+      dur="3s"
+      repeatCount="indefinite"/>
+
+  </text>
+
+
+  <text
+    x="600"
+    y="130"
+    text-anchor="middle"
+    font-family="monospace"
+    font-size="18"
+    fill="#b8c7d9">
+
+    AI • ML • SQL  • DATA ANALYTICS
+
+  </text>
+
+
+  <!-- Animated line -->
+
+  <rect
+    x="350"
+    y="160"
+    width="500"
+    height="3"
+    rx="2"
+    fill="#333"/>
+
+  <rect
+    x="350"
+    y="160"
+    width="80"
+    height="3"
+    rx="2"
+    fill="#00d9ff">
+
+    <animate
+      attributeName="x"
+      values="350;770;350"
+      dur="4s"
+      repeatCount="indefinite"/>
+
+  </rect>
+
+
+  <text
+    x="600"
+    y="195"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="15"
+    fill="#ffffff">
+
+    Thanks for visiting my profile ⭐
+
+  </text>
+
+</svg>
