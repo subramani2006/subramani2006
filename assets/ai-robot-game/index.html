@@ -1,1 +1,444 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEURAL//CORE — AI Robot Mission</title>
+
+    <meta
+        name="description"
+        content="NEURAL//CORE - A futuristic AI robot mission game by Subramani U."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- =========================
+             START SCREEN
+        ========================== -->
+
+        <section id="startScreen" class="screen active">
+
+            <div class="start-grid"></div>
+
+            <div class="start-content">
+
+                <div class="system-label">
+                    SYSTEM ONLINE // NEURAL CORE
+                </div>
+
+                <h1>
+                    NEURAL<span>//</span>CORE
+                </h1>
+
+                <p class="subtitle">
+                    AUTONOMOUS AI ROBOT MISSION
+                </p>
+
+                <div class="robot-logo">
+                    <div class="robot-head">
+                        <div class="robot-eye left"></div>
+                        <div class="robot-eye right"></div>
+                    </div>
+
+                    <div class="robot-body"></div>
+
+                    <div class="robot-core"></div>
+                </div>
+
+                <div class="mission-preview">
+
+                    <div>
+                        <span>MISSION</span>
+                        <strong>07</strong>
+                    </div>
+
+                    <div>
+                        <span>THREAT</span>
+                        <strong>HIGH</strong>
+                    </div>
+
+                    <div>
+                        <span>CORE</span>
+                        <strong>ACTIVE</strong>
+                    </div>
+
+                </div>
+
+                <button id="startButton" class="primary-button">
+                    INITIALIZE MISSION
+                </button>
+
+                <p class="controls-preview">
+                    WASD / ARROW KEYS &nbsp; • &nbsp; SHIFT BOOST
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GAME SCREEN
+        ========================== -->
+
+        <section id="gameScreen" class="screen">
+
+            <canvas id="gameCanvas"></canvas>
+
+            <!-- TOP HUD -->
+
+            <header class="hud-top">
+
+                <div class="brand">
+                    <span class="brand-dot"></span>
+                    NEURAL//CORE
+                </div>
+
+                <div class="mission-status">
+
+                    <span class="small-label">
+                        MISSION
+                    </span>
+
+                    <strong id="missionNumber">
+                        07
+                    </strong>
+
+                </div>
+
+                <div class="timer-box">
+
+                    <span class="small-label">
+                        TIME
+                    </span>
+
+                    <strong id="timer">
+                        120
+                    </strong>
+
+                </div>
+
+            </header>
+
+
+            <!-- LEFT HUD -->
+
+            <aside class="hud-left">
+
+                <div class="hud-card">
+
+                    <div class="hud-title">
+                        AI CORE
+                    </div>
+
+                    <div class="stat">
+
+                        <div class="stat-row">
+                            <span>ENERGY</span>
+                            <span id="energyText">100%</span>
+                        </div>
+
+                        <div class="bar">
+                            <div
+                                id="energyBar"
+                                class="bar-fill energy"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div class="stat-row">
+                            <span>SHIELD</span>
+                            <span id="shieldText">100%</span>
+                        </div>
+
+                        <div class="bar">
+                            <div
+                                id="shieldBar"
+                                class="bar-fill shield"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <div class="stat-row">
+                            <span>XP</span>
+                            <span id="xpText">0 / 1000</span>
+                        </div>
+
+                        <div class="bar">
+                            <div
+                                id="xpBar"
+                                class="bar-fill xp"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hud-card objective-card">
+
+                    <div class="hud-title">
+                        CURRENT OBJECTIVE
+                    </div>
+
+                    <div id="objective">
+                        COLLECT 5 ENERGY CORES
+                    </div>
+
+                    <div class="objective-progress">
+                        <span id="objectiveCount">0</span>
+                        /
+                        <span id="objectiveTotal">5</span>
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- RIGHT HUD -->
+
+            <aside class="hud-right">
+
+                <div class="hud-card radar-card">
+
+                    <div class="hud-title">
+                        RADAR
+                    </div>
+
+                    <div class="radar">
+
+                        <div class="radar-ring ring-1"></div>
+                        <div class="radar-ring ring-2"></div>
+                        <div class="radar-ring ring-3"></div>
+
+                        <div class="radar-sweep"></div>
+
+                        <div class="radar-center"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hud-card system-card">
+
+                    <div class="hud-title">
+                        SYSTEM
+                    </div>
+
+                    <div class="system-line">
+                        <span>AI STATUS</span>
+                        <strong class="online">ONLINE</strong>
+                    </div>
+
+                    <div class="system-line">
+                        <span>THREATS</span>
+                        <strong id="threatCount">0</strong>
+                    </div>
+
+                    <div class="system-line">
+                        <span>CORES</span>
+                        <strong id="coreCount">0</strong>
+                    </div>
+
+                    <div class="system-line">
+                        <span>SCORE</span>
+                        <strong id="score">000000</strong>
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- BOTTOM HUD -->
+
+            <div class="hud-bottom">
+
+                <div class="controls">
+
+                    <span>
+                        <kbd>W</kbd>
+                        <kbd>A</kbd>
+                        <kbd>S</kbd>
+                        <kbd>D</kbd>
+                        MOVE
+                    </span>
+
+                    <span>
+                        <kbd>SHIFT</kbd>
+                        BOOST
+                    </span>
+
+                    <span>
+                        <kbd>P</kbd>
+                        PAUSE
+                    </span>
+
+                </div>
+
+                <div class="level-display">
+
+                    LEVEL
+                    <strong id="level">
+                        01
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- NOTIFICATION -->
+
+            <div id="notification" class="notification">
+                SYSTEM INITIALIZED
+            </div>
+
+
+            <!-- PAUSE -->
+
+            <div id="pauseOverlay" class="overlay">
+
+                <div class="overlay-box">
+
+                    <div class="system-label">
+                        SYSTEM PAUSED
+                    </div>
+
+                    <h2>MISSION SUSPENDED</h2>
+
+                    <button
+                        id="resumeButton"
+                        class="primary-button"
+                    >
+                        RESUME
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             GAME OVER
+        ========================== -->
+
+        <section id="gameOverScreen" class="screen">
+
+            <div class="result-box">
+
+                <div class="system-label">
+                    MISSION TERMINATED
+                </div>
+
+                <h2>
+                    CORE OFFLINE
+                </h2>
+
+                <div class="final-score">
+
+                    <span>FINAL SCORE</span>
+
+                    <strong id="finalScore">
+                        000000
+                    </strong>
+
+                </div>
+
+                <div class="result-stats">
+
+                    <div>
+                        <span>LEVEL</span>
+                        <strong id="finalLevel">01</strong>
+                    </div>
+
+                    <div>
+                        <span>CORES</span>
+                        <strong id="finalCores">0</strong>
+                    </div>
+
+                    <div>
+                        <span>XP</span>
+                        <strong id="finalXP">0</strong>
+                    </div>
+
+                </div>
+
+                <button
+                    id="restartButton"
+                    class="primary-button"
+                >
+                    REINITIALIZE
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             VICTORY
+        ========================== -->
+
+        <section id="victoryScreen" class="screen">
+
+            <div class="result-box victory">
+
+                <div class="system-label">
+                    MISSION COMPLETE
+                </div>
+
+                <h2>
+                    NEURAL CORE SECURED
+                </h2>
+
+                <p>
+                    Autonomous intelligence successfully
+                    completed the mission.
+                </p>
+
+                <div class="final-score">
+
+                    <span>FINAL SCORE</span>
+
+                    <strong id="victoryScore">
+                        000000
+                    </strong>
+
+                </div>
+
+                <button
+                    id="victoryRestart"
+                    class="primary-button"
+                >
+                    PLAY AGAIN
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="game.js"></script>
+
+</body>
+</html>
